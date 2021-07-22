@@ -171,7 +171,34 @@ arr+5
 arr-5
 arr*arr
 arr/arr
-1/arr
-#in case of zero it numpy still gives answer like nan or inf
-       
-       
+1/arr #in case of zero it numpy still gives answer like nan or inf
+np.sqrt(arr)
+np.sin(arr)
+np.log(arr)
+
+print(arr.sum())
+print(arr.mean())
+print(arr.var())
+print(arr.std())
+
+
+
+np.arange(0,25).reshape(5,5)
+
+array([[ 0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9],
+       [10, 11, 12, 13, 14],
+       [15, 16, 17, 18, 19],
+       [20, 21, 22, 23, 24]])
+
+
+np.arange(0,25)
+arr=np.arange(0,25).reshape(5,5)
+arr.sum(axis=0)#for sum across the row
+arr.sum(axis=1)#for sum across the column
+
+
+
+
+#PANDAS
+
