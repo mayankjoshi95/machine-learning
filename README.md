@@ -164,4 +164,14 @@ arr[arr>4]
 array([ 5,  6,  7,  8,  9, 10])
        
        
+#NUMPY OPERATION
+
+arr=np.arange(0,10)
+arr+5
+arr-5
+arr*arr
+arr/arr
+1/arr
+#in case of zero it numpy still gives answer like nan or inf
+       
        
