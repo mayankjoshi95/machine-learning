@@ -148,4 +148,20 @@ arr_2d[:2,1:]
 
 array([[2, 3],
        [3, 4]])
-​
+      
+      
+      
+#conditional arrays 
+arr=np.arange(1,11)
+arr>4
+array([False, False, False, False,  True,  True,  True,  True,  True,
+        True])
+        
+bool_=arr>4
+arr[bool_]
+array([ 5,  6,  7,  8,  9, 10])
+arr[arr>4]
+array([ 5,  6,  7,  8,  9, 10])
+       
+       
+       
