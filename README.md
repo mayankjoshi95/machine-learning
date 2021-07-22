@@ -78,6 +78,74 @@ array([[66, 59, 55, 15,  7],
 np.random.seed(42)
 np.random.rand(4)
 
-array([0.37454012, 0.95071431, 0.73199394, 0.59865848])#we always get the same random numbers
+array([0.37454012, 0.95071431, 0.73199394, 0.59865848])#we always get the same random numbers,they have to be in same cell
 
 
+
+arr=np.arange(0,25)
+
+array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24])
+arr.reshape(5,5)
+
+array([[ 0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9],
+       [10, 11, 12, 13, 14],
+       [15, 16, 17, 18, 19],
+       [20, 21, 22, 23, 24]])
+       
+       
+arr.max()
+24
+arr.min()
+0
+arr.argmin()#for index
+
+
+
+
+#NUMPY INDEXING AND SELECTION
+
+
+#GRABBING SINGLE ELEMENT
+#GRABBING SLICE OF ELEMENT
+#BROADCASTING SELECTION
+#INDEXING AND SELECTION IN 2-D
+#CONDITIONAL SELECTION
+
+
+
+import numpy as np
+arri=np.arange(0,11)
+arri[1:5]
+
+
+
+#BROADCAST
+
+arri[0:5]=1000
+array([1000, 1000, 1000, 1000, 1000,    5,    6,    7,    8,    9,   10])
+
+slice_of_array=arri[0:5]
+array([1000, 1000, 1000, 1000, 1000])
+arri
+array([1000, 1000, 1000, 1000, 1000,    5,    6,    7,    8,    9,   10])
+#copying
+arri_copy=arri.copy()
+
+
+
+arr_2d=np.array([[1,2,3],[2,3,4],[5,6,7]])
+array([[1, 2, 3],
+       [2, 3, 4],
+       [5, 6, 7]])
+)
+
+arr_2d[0,2]
+3
+
+arr_2d[:2,1:]
+
+array([[2, 3],
+       [3, 4]])
+​
