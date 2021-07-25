@@ -373,4 +373,30 @@ df['CC Number'].apply(last_four)
 #it applies this to last four digit of every number
 
 
+#it applies to single column
+def yelp(price):
+    if price<=10:
+        return '$'
+    elif price>=10 and price<=30:
+        return  '$$'
+    else:
+        return '$$$'
+        
+df['total_bill'].apply(yelp)    
+      
+      
+      
+      
+#APPLY METHOD 
+def simple(num):
+   return num
+can be wriiten in terms of anonymous function using lambda
+
+lambda num:num*2  #used for multiple column #first expression is an argument and can have multiple argument seperated by comma and second expression always return an object 
+
+df['total_bill'].apply(lambda num:num*2)
+
+      
+      
+
 
