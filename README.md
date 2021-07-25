@@ -311,3 +311,13 @@ df=pd.DataFrame(mydata,index=myindex,columns=mycolumn)
 df.info()
 df=pd.read_csv('C:\\Users\\home\\Downloads\\03-Pandas\\tips.csv')
 df
+
+
+
+mycols=['total_bill','tip']
+df[mycols]
+
+
+df['tip_percentage']=100*df['tip']/df['total_bill']
+df['prize_per_person']=df['total_bill']/df['size']
+df.head()
