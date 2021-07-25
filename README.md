@@ -370,7 +370,7 @@ df[(df['total_bill']>40)&(df['sex']=='Male')]
 def last_four(num):
     return str(num)[-4:]
 df['CC Number'].apply(last_four)
-
+#it applies this to last four digit of every number
 
 
 
