@@ -333,6 +333,9 @@ df.shape[1]
 #it set and reset the index Payment ID as an index
 df.set_index('Payment ID')
 df.reset_index()
+#column are features
+#row are instnaces of the data
+
 
 
 
@@ -343,5 +346,31 @@ df.loc['Sun2959']
 
 df.iloc[0:4]#slicing
 
-#in order to remove or add new row or column
+#conditional filtering #when data is large enugh we donot filter based on a number but we typically filter based on a condtion .it allow us to select row
+#filter by single condition
+#filter by multile condition
+#check against multiple possible values
+bool_series=df['total_bill']>14
+df[bool_series]
+#or
+df[df['total_bill']>14]
+
+#MULTIPLE CONDTION & (AND) | (OR) for pandas #for python it is (and, or)
+df[(df['total_bill']>40)&(df['sex']=='Male')]
+
+
+
+
+
+
+#METHOD IN PANDAS
+
+.apply()method call to apply any custom python function of our own to every row in a series.so we can use one or multiple column as input
+
+def last_four(num):
+    return str(num)[-4:]
+df['CC Number'].apply(last_four)
+
+
+
 
