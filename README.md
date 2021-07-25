@@ -325,11 +325,23 @@ np.round(100*df['tip']/df['total_bill'],2)#to calculate round
 
 #to drop the column
 
-df.drop('tip_percentage',axis=1)#it doesnot change permanently
+df.drop('tip_percentage',axis=1)#it doesnot change permanently#also you have to present actual string not just row number
 df.shape[0]
 df.shape[1]
 
 
-#it set the index Payment ID as an index
+#it set and reset the index Payment ID as an index
 df.set_index('Payment ID')
+df.reset_index()
+
+
+
+#for finding the location
+
+df.iloc[0]
+df.loc['Sun2959']
+
+df.iloc[0:4]#slicing
+
+#in order to remove or add new row or column
 
