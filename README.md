@@ -321,3 +321,15 @@ df[mycols]
 df['tip_percentage']=100*df['tip']/df['total_bill']
 df['prize_per_person']=df['total_bill']/df['size']
 df.head()
+np.round(100*df['tip']/df['total_bill'],2)#to calculate round
+
+#to drop the column
+
+df.drop('tip_percentage',axis=1)#it doesnot change permanently
+df.shape[0]
+df.shape[1]
+
+
+#it set the index Payment ID as an index
+df.set_index('Payment ID')
+
