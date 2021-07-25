@@ -389,14 +389,106 @@ df['total_bill'].apply(yelp)
       
 #APPLY METHOD 
 def simple(num):
-   return num
+   return num*2
 can be wriiten in terms of anonymous function using lambda
 
 lambda num:num*2  #used for multiple column #first expression is an argument and can have multiple argument seperated by comma and second expression always return an object 
 
 df['total_bill'].apply(lambda num:num*2)
+def quality(total_bill,tip):
+    if tip/total_bill>.25:
+        return "generous"
+    else:
+        return "other"
+ 
+ 
+ 
+ #NP.VECTOR
+ 
+ df['Quality']=np.vectorize(quality)(df['total_bill'],df['tip'])
+ 
+ 
+ 
+ #DESCRIPTION METHOD AND SORTING METHOD
+ #describe method is used for determining some  statistical data like percentile ,mean,std of the numerical values
+ df.descr
+ 
+ 
+ 
+        
+        
+        
+     
+df[['total_bill','tip']].apply(lambda df:quality(df['total_bill'],df['tip']),axis=1)  
 
-      
-      
+
+#sort values
+
+
+df.sort_values('tip',ascending=False)
+
+df.sort_values(['tip','size'])
+df.sort_values('tip')
+
+#first it will sort by tip and then if values in the tip are same then it will sort by size
+
+#grab min and max location 
+
+df['total_bill'].max()#return maximum values
+df['total_bill'].idxmax()#return index of the maximum values
+
+#to see how correlated are each other
+df.corr()
+
+#counts per catogory
+
+df['sex'].value_counts()
+Male      157
+Female     87
+Name: sex, dtype: int64
+
+#unique
+
+df['day'].unique() #only to get the unique values
+#nunique #number of unique values
+df['day'].nunique() 
+
+
+
+
+
+#SWITCHING OUT OR REPLACING VALUES
+
+df['sex'].replace(['Female','Male'],['F','M'])  #REPLACE IS EASIER FOR FEWER ITEMS 
+
+mymap={'Female':'F','Male':'M'}
+df['sex'].map(mymap)#MAP IS EASIER FOR LOTS OF ITEMS
+
+#FOR DUPLICATE FUNCTION
+simple_df=pd.DataFrame([1,2,2],['a','b','c'])
+simple_df.duplicated()
+a    False
+b    False
+c     True
+dtype: bool
+
+simple_df=pd.DataFrame([1,2,2,2],['a','b','c','d'])
+simple_df.drop_duplicates()
+a	1
+b	2
+
+df[df['total_bill'].between(10,20,inclusive=True)]
+
+
+#how to grab n largest and n smallest
+df.nlargest(10,'tip')
+df.nsmallest(10,'tip')
+
+
+#sample the data
+df.sample(5)
+df.sample(frac=.1)
+
+
 
 
