@@ -201,4 +201,113 @@ arr.sum(axis=1)#for sum across the column
 
 
 #PANDAS
+#CLEAN AND ORGANISE DATA,EXPLORATORY DATA ANALYSIS 
+#EXTRMELY POWERFUL TABLE(DATA FRAME) SYSTEM BUILT OF NUMPY
+#WHY PANDA INSTEAD OF OPENING SPREAC SHEET OR GOOGLESPREAD SHEET
 
+#WHAT PANDAS CAN DO
+#TOOLS FOR READING AND WRITING DATA  BETWEEN MANY FORMAT
+#INTELLIGENTLY GRAB DATA BASED ON O=INDEXING AND,LOGIC,SUBSETTING,AND MORE
+#HANDLE MISSING DATA
+#ADJUST AND RESTRUCTURE DATA
+#IT IS LIMITED ONLY BY THE RAM OF YOUR COMPUTER
+
+
+#WE STUDY
+#SERIES AND DATA FRAME
+#CONDITIONAL FILTERING AND USEFUL METHODS
+#MISSING DATA
+#GROUP BY OPERATIONS
+#COMBINING DATA FRAMES
+#TEXT METHODS AND TIME METHODS
+#INPUTS AND OUTPUTS
+
+
+
+
+#SERIES IS DATA STRUCTURE IN PANDAS  THAT HOLDS AND ARRAY OF INFORMATION ALONG WITH A NAMED INDEX
+BASICALLY A 1D array with axis list
+pandas adds on the labelled index that can be string or names making it easier to grab data in an informative way,data is numerically organised
+
+
+myindex=['USA','CANADA','MEXICO']
+mydata=[1776,1862,1900]
+myser=pd.Series(data=mydata,index=myindex)
+myser
+myser['USA']
+
+ages={'sam':5,'frank':10,'spike':7}
+pd.Series(ages)
+
+
+
+#grabbing of data
+
+# Imaginary Sales Data for 1st and 2nd Quarters for Global Company
+q1 = {'Japan': 80, 'China': 450, 'India': 200, 'USA': 250}
+q2 = {'Brazil': 100,'China': 500, 'India': 210,'USA': 260}
+sales_q1=pd.Series(q1)
+sales_q2=pd.Series(q2)
+sales_q1['Japan']
+
+#Broadcast
+
+# Imaginary Sales Data for 1st and 2nd Quarters for Global Company
+q1 = {'Japan': 80, 'China': 450, 'India': 200, 'USA': 250}
+q2 = {'Brazil': 100,'China': 500, 'India': 210,'USA': 260}
+sales_q1=pd.Series(q1)
+sales_q2=pd.Series(q2)
+sales_q1['Japan']
+sales_q1*2  #broad casting work as pajdas is built using numpy array
+
+
+sales_q1+sales_q2
+Brazil      NaN
+China     950.0
+India     410.0
+Japan       NaN
+USA       510.0
+dtype: float64
+
+
+
+#for values not present in both just put 0 for the cas where they are not present
+sales_q1.add(sales_q2,fill_value=0)
+Brazil    100.0
+China     950.0
+India     410.0
+Japan      80.0
+USA       510.0
+dtype: float64
+
+#DATAFRAME IS A TABLE OF COLUMNS AND ROWS IN PANDAS THAT WE CAN EASILY RESTRUCTURE AND FILTER
+#A GROUP OF PANDAS SERIES OBJECT THAT SHARE THE SAME INDEX
+
+#CREATE DATA FRAME,#GRAB A COLUMN OR MULTIPLE COLUMNS
+#GRAB A ROW OR MULTIPLE ROW
+#INSERT NEW COLUMN OR NEW ROW
+
+np.random.seed(101)
+mydata=np.random.randint(1,101,(4,3))
+myindex=['CA','NY','AZ','TX']
+mycolumn=['Jan','Feb','mar']
+df=pd.DataFrame(mydata,index=myindex,columns=mycolumn)
+df
+
+     Jan	Feb	mar
+CA	96	12	82
+NY	71	64	88
+AZ	76	10	78
+TX	41	5	64
+
+
+#how to read in pandas data frame from an existing file such as .csv file
+
+np.random.seed(101)
+mydata=np.random.randint(1,101,(4,3))
+myindex=['CA','NY','AZ','TX']
+mycolumn=['Jan','Feb','mar']
+df=pd.DataFrame(mydata,index=myindex,columns=mycolumn)
+df.info()
+df=pd.read_csv('C:\\Users\\home\\Downloads\\03-Pandas\\tips.csv')
+df
