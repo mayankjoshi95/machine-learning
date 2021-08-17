@@ -225,7 +225,7 @@ arr.sum(axis=1)#for sum across the column
 
 
 
-#SERIES IS DATA STRUCTURE IN PANDAS  THAT HOLDS AND ARRAY OF INFORMATION ALONG WITH A NAMED INDEX
+#SERIES IS DATA STRUCTURE IN PANDAS  THAT HOLDS AN ARRAY OF INFORMATION ALONG WITH A NAMED INDEX
 BASICALLY A 1D array with axis list
 pandas adds on the labelled index that can be string or names making it easier to grab data in an informative way,data is numerically organised
 
@@ -371,6 +371,8 @@ def last_four(num):
     return str(num)[-4:]
 df['CC Number'].apply(last_four)
 #it applies this to last four digit of every number
+str(num) as we cannot indexed object thus we put the integer as s tring and then apply[-4:]
+str(num)[-4:]
 
 
 #it applies to single column
@@ -385,7 +387,8 @@ def yelp(price):
 df['total_bill'].apply(yelp)    
       
       
-      
+ #these apply function should only return a string value to be applied to every  row to be applied to every series
+ 
       
 #APPLY METHOD 
 def simple(num):
