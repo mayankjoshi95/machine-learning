@@ -823,3 +823,49 @@ cylinders
 
 
 
+#can't pass for differnt values .xs
+
+
+year_cyl.loc[[70,80]]
+
+
+70	4	25.285714	107.000000	2292.571429	16.000000	2.285714
+       6	   20.500000	199.000000	2710.500000	15.500000	1.000000
+       8	    14.111111	367.555556	3940.055556	11.194444	1.000000
+80	3	     23.700000	70.000000	2420.000000	12.500000	3.000000
+       4	       34.612000	111.000000	2360.080000	17.144000	2.200000
+       5	       36.400000	121.000000	2950.000000	19.900000	2.000000
+       6	       25.900000	196.500000	3145.500000	15.050000	2.000000
+
+
+
+##year_cyl.xs(key=4,level='cylinders')
+
+
+df[df['cylinders'].isin([6,8])].groupby(['model_year','cylinders']).mean()
+
+
+
+year_cyl.swaplevel()
+
+
+##it swap the last two level in a multi index
+
+
+
+year_cyl.sort_index(level='model_year',ascending =False)
+
+#it sort in the descendiing order 
+
+
+
+df.agg(['median','mean'])
+#find the aggerigate method allows you to customize what aggeregate function you want per category
+
+
+df.agg(['sum','mean'])[['mpg','cylinders']]
+
+
+           mpg	cylinders
+sum	9358.800000	2171.000000
+mean	23.514573	5.454774
