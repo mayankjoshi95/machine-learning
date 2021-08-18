@@ -492,6 +492,334 @@ df.nsmallest(10,'tip')
 df.sample(5)
 df.sample(frac=.1)
 
+#this wil sample 10%of my data frame
+
+
+
+#MISING DATA REAL WOORLD DATA WILL OFTEN BE MISSING DATA FOR A WIDE VARIETY OF REASON
+
+#MANY MACHINE LEARNINGMODELS AND STATISTICAL METHODS CANNOT WORK WITH MISSING DATA POINTS,IN WHICH WE NEED TO DECIDE WHAT TO DO WITH THE MISSING DATA
+#options for dealing with missing data is
+ 1.keep it
+ 2.Remove it 
+ 2.Replace it
+ 
+ 
+ #keeping the missing dta pros
+ easiest to do 
+ doesnot manipulate or change the true data
+ 
+ 
+ CONS
+ many method doesnot suport NaN 
+ often there are resonable guessess
+ 
+ #DROPPING OR REMOVING THE MISSING DATA 
+ PROS:
+ EASY TO DO 
+ CAN BE BASED ON RULES
+ 
+ CONS:
+ 
+ POTENTIAL TO LOSE A LOT OF DATA OR USEFUL  INFORMATION
+ LIMITS TRAINED MODEL FOR FUTUTE DATA
+ 
+ 
+ #FILLING IN THE MISSING DATA
+ 
+ PROS:
+ POTENTIAL TO SAVE  A LOT OF DATA FOR USE IN THE TRAINING MODEL
+ CONS: HARDEST TO DO  AND SOMEWHAT ARBITRARY 
+ POTENTIAL TO LEAD TO FALSE  CONCLUSIONS
+ 
+ 
+ #filling in the missing data 
+ 
+ 
+ PROS:
+ 
+ POTENTIAL TO SAVE LOT OF DATA FOR USE IN TRAINING MODEL 
+ 
+ CONS
+ HARDEST TO DO  AND SOMEWHAT ARBITRARY  
+ POTNETIAL TO LEAD TO FALSE CONCLUSION
+ 
+ #FILLING IN MISSING DATA 
+ FILL WITH INTERPOLATED  OR ESTIMATED VALUE
+ MUCH HARDER AND REQUIRE REASONABLE ASSUMPTION
+ 
+ 
+ 
+ df.isnull() #it return true if there is null value
+ 
+ df.notnull()# return true if there is no null values
+ 
+ df[df['pre_movie_score'].notnull()]
+ 
+ irst_name	last_name	age	sex	pre_movie_score	post_movie_score
+0	Tom	Hanks	63.0	m	8.0	10.0
+3	Oprah	Winfrey	66.0	f	6.0	8.0
+4	Emma	Stone	31.0	f	7.0	9.0
+
+
+df['pre_movie_score']=df['pre_movie_score'].fillna(0)  #for permanent 
+
+
+
+
+df[(df['first_name'].notnull())&(df['sex'].notnull())]
+
+first_name	last_name	age	sex	pre_movie_score	post_movie_score
+0	Tom	Hanks	63.0	m	8.0	10.0
+2	Hugh	Jackman	51.0	m	NaN	NaN
+3	Oprah	Winfrey	66.0	f	6.0	8.0
+4	Emma	Stone	31.0	f	7.0	9.0
+
+
+
+#KEEEP THE DATA IS EASY YOU READ  THE DATA AND  KEEEP NAME OF THE MISSING VALUE
+
+
+#DROP THE DATA IT WILL ASK 
+HOW YOU DROP THE DATA IN  ROW OR COLUMN OR ANY CELLS OR VALUES ARE MISSING 
+
+ALSI IF ANY NAN VALUE IS PRESENT DROP IT
+OR IF ALLL THE VALUES ARE NAN DROP THEM
+
+THRESH :REQUIRE THAT MANY NON NA VALUES i.e if I WRITE THRES=1 THEN USING df.dropna(thresh=1) means donot remove that row which contains atleast one non null value
+
+df.dropna()
+
+first_name	last_name	age	sex	pre_movie_score	post_movie_score
+0	Tom	Hanks	63.0	m	8.0	10.0
+3	Oprah	Winfrey	66.0	f	6.0	8.0
+4	Emma	Stone	31.0	f	7.0	9.0
+
+
+it is going to drop the rows which has any missing values
+
+
+df.dropna(thresh=1)
+
+
+first_name	last_name	age	sex	pre_movie_score	post_movie_score
+0	Tom	Hanks	63.0	m	8.0	10.0
+2	Hugh	Jackman	51.0	m	NaN	NaN
+3	Oprah	Winfrey	66.0	f	6.0	8.0
+4	Emma	Stone	31.0	f	7.0	9.0
+
+
+
+
+
+df.dropna(thresh=5)#hugh jackman gets dropped cuz he donot has atleast 5 non null values
+
+
+first_name	last_name	age	sex	pre_movie_score	post_movie_score
+0	Tom	Hanks	63.0	m	8.0	10.0
+3	Oprah	Winfrey	66.0	f	6.0	8.0
+4	Emma	Stone	31.0	f	7.0	9.0
+
+
+
+df.dropna(axis=1)#here it says that drop the column who contain any non null values 
+
+
+
+0
+1
+2
+3
+4
+
+
+
+
+#thus genrally we leave default axis =0 i.e df.dropna(axis=0)
+
+
+
+df.dropna(subset=['last_name'])
+
+first_name	last_name	age	sex	pre_movie_score	post_movie_score
+0	Tom	Hanks	63.0	m	8.0	10.0
+2	Hugh	Jackman	51.0	m	NaN	NaN
+3	Oprah	Winfrey	66.0	f	6.0	8.0
+4	Emma	Stone	31.0	f	7.0	9.0
+
+
+
+
+
+
+
+#FILLING IN THE DATA 
+
+df['pre_movie_score'].fillna(df['pre_movie_score'].mean())
+
+#to fill in the data with the mean value
+df.fillna(df.mean())
+
+
+
+first_name	last_name	age	sex	pre_movie_score	post_movie_score
+0	Tom	Hanks	63.00	m	8.0	10.0
+1	NaN	NaN	52.75	NaN	7.0	9.0
+2	Hugh	Jackman	51.00	m	7.0	9.0
+3	Oprah	Winfrey	66.00	f	6.0	8.0
+4	Emma	Stone	31.00	f	7.0	9.0
+
+
+
+airline_tix = {'first':100,'business':np.nan,'economy-plus':50,'economy':30}
+ser=pd.Series(airline_tix)
+ser
+
+first           100.0
+business          NaN
+economy-plus     50.0
+economy          30.0
+dtype: float64
+
+
+
+
+we can interpolate the misssing data which in this case is the average between 50 and 100 i.e 70
+
+ser.interpolate()
+first           100.0
+business         75.0
+economy-plus     50.0
+economy          30.0
+dtype: float64
+
+
+##NEVER DO COMPARISION ON THE NULL VALUE USING == INSTEAD USE IS 
+
+
+
+
+##GROUP BY OPERATION
+A GROUP BY OPERATION ALLOW US TO EXAMINE DATA ON  A PER CATOGORYY BASIS I.E MEAN PER CATEGORY HOW MANY ROOWS PER CATEGORY
+##ONCE YOU HAVE DECIDED THE CATOGORY TO GROUP BY WE SEPERATE OUT ALL THE OTHER COLUMN BY DISTINCT CATOGORY
+##THEN LETS SAY WE DECIDE ON SUM THEN ITS GONE TAKE SUM PER CATEGORY 
+#SAY IF WE USE THE MEAN THEN IT USE THE AVERAGE VALUE PER CATEGORY 
+#COUNT IT COUNT NUMBER OF VALUES PER CATEGORY
+
+
+avg_year=df.groupby('model_year').mean()
+avg_year.index
+
+
+Int64Index([70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82], dtype='int64', name='model_year')
+
+
+
+avg_year=df.groupby('model_year').mean()
+
+mpg	cylinders	displacement	weight	acceleration	origin
+model_year						
+70	17.689655	6.758621	281.413793	3372.793103	12.948276	1.310345
+71	21.250000	5.571429	209.750000	2995.428571	15.142857	1.428571
+72	18.714286	5.821429	218.375000	3237.714286	15.125000	1.535714
+73	17.100000	6.375000	256.875000	3419.025000	14.312500	1.375000
+74	22.703704	5.259259	171.740741	2877.925926	16.203704	1.666667
+75	20.266667	5.600000	205.533333	3176.800000	16.050000	1.466667
+76	21.573529	5.647059	197.794118	3078.735294	15.941176	1.470588
+77	23.375000	5.464286	191.392857	2997.357143	15.435714	1.571429
+78	24.061111	5.361111	177.805556	2861.805556	15.805556	1.611111
+79	25.093103	5.827586	206.689655	3055.344828	15.813793	1.275862
+80	33.696552	4.137931	115.827586	2436.655172	16.934483	2.206897
+81	30.334483	4.620690	135.310345	2522.931034	16.306897	1.965517
+82	31.709677	4.193548	128.870968	2453.548387	16.638710	1.645161
+
+avg_year['mpg']
+
+model_year
+70    17.689655
+71    21.250000
+72    18.714286
+73    17.100000
+74    22.703704
+75    20.266667
+76    21.573529
+77    23.375000
+78    24.061111
+79    25.093103
+80    33.696552
+81    30.334483
+82    31.709677
+Name: mpg, dtype: float64
+
+
+
+df.groupby(['model_year','cylinders']).mean()#this is the idea of multilevel index
+#under the model year it shows the cylinders 
+
+#here model_years and cylinders are not the column name they are the index name they are the two level of the index
+
+df.groupby(['model_year','cylinders']).mean().index
+
+
+year_cyl=df.groupby(['model_year','cylinders']).mean()
+
+year_cyl.index.names
+
+year_cyl.index.levels
+
+FrozenList([[70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82], [3, 4, 5, 6, 8]])
+
+year_cyl.loc[70]
+             mpg	      displacement	weight	      acceleration	origin
+cylinders 
+4	25.285714	107.000000	2292.571429	16.000000	2.285714
+6	20.500000	199.000000	2710.500000	15.500000	1.000000
+8	14.111111	367.555556	3940.055556	11.194444	1.000000
+
+
+
+year_cyl.loc[[70,82]]#in here we take two coloumn and they act like a multi level index
+
+
+70    4	25.285714	107.000000	2292.571429	16.000000	2.285714
+      6	     20.500000	199.000000	2710.500000	15.500000	1.000000
+      8	     14.111111	367.555556	3940.055556	11.194444	1.000000
+82    4	32.071429	118.571429	2402.321429	16.703571	1.714286
+      6	     28.333333	225.000000	2931.666667	16.033333	1.000000
+      
+      
+      
+year_cyl.loc[(70,4)]
+
+here inside the location we put the tuple
+
+mpg               25.285714
+displacement     107.000000
+weight          2292.571429
+acceleration      16.000000
+origin             2.285714
+Name: (70, 4), dtype: float64
+
+
+##  .xs()  :- this method takes in the key argument to select data at a particular level of  a multiindex
+
+
+key:- label or tuple of  a label .Label contained in the index or partially in the multiindex
+
+axis:-'0 for index','1 for the column'
+
+level: it can be reffered by label or position
+
+
+year_cs.xs(key=70,axis=0,level='model_year')
+
+            mpg	displacement	weight	     acceleration	       origin
+cylinders					 
+
+
+4	25.285714	107.000000	2292.571429	16.000000	2.285714
+6	20.500000	199.000000	2710.500000	15.500000	1.000000
+8	14.111111	367.555556	3940.055556	11.194444	1.000000
 
 
 
