@@ -869,3 +869,114 @@ df.agg(['sum','mean'])[['mpg','cylinders']]
            mpg	cylinders
 sum	9358.800000	2171.000000
 mean	23.514573	5.454774
+
+
+
+df.agg({'mpg':['max','mean'],'weight':['mean','std']})
+
+
+           mpg	weight
+max	46.600000	NaN
+mean	23.514573	2970.424623
+std	NaN	       846.841774
+
+#applying specific aggeregate function to a specific column
+
+
+
+#often data we need exists in two or more sources,fortunately,pandas make it easy to combine these togehther
+3the simplest combination is if both the sources  are already in the same format then concatenation through pd.concat()
+
+
+
+axis0 = pd.concat([one,two],axis=0)
+axis0##NaN is there because you can't have same  index value  between A and C THUS WE USE NaN 
+
+0       A0	B0	NaN	NaN
+1	A1	B1	NaN	NaN
+2	A2	B2	NaN	NaN
+3	A3	B3	NaN	NaN
+0	NaN	NaN	C0	D0
+1	NaN	NaN	C1	D1
+2	NaN	NaN	C2	D2
+3	NaN	NaN	C3	D3
+#cocat two string with rows
+
+
+axis1= pd.concat([one,two],axis=1)##PUT IN THE LIST BRACKET
+
+
+0       A0	B0	C0	D0
+1	A1	B1	C1	D1
+2	A2	B2	C2	D2
+3	A3	B3	C3	D3
+
+#concat two string with column
+
+
+
+two.columns=one.columns
+pd.concat([one,two])
+#to concat two data together in row is to equal the column index
+#if C and D have same features
+
+A	B
+0	A0	B0
+1	A1	B1
+2	A2	B2
+3	A3	B3
+0	C0	D0
+1	C1	D1
+2	C2	D2
+3	C3	D3
+
+
+
+mydf.index=range(len(mydf))
+mydf
+
+       A	B
+0	A0	B0
+1	A1	B1
+2	A2	B2
+3	A3	B3
+4	C0	D0
+5	C1	D1
+6	C2	D2
+7	C3	D3
+
+#there can be column preseent in one data frame and not present in the other or there can be rows present in on =e dat arame but not in other thus we need merge
+
+
+#the .merge() methood takes in  a key argument labeled  how 
+ there are 3 main ways of merging thetables using how parameter :
+ 1. INNER 
+ 2. OUTER 
+ 3. LEFT or RIGHT 
+
+
+
+
+##INNER 
+
+registrations = pd.DataFrame({'reg_id':[1,2,3,4],'name':['Andrew','Bobo','Claire','David']})
+logins = pd.DataFrame({'log_id':[1,2,3,4],'name':['Xavier','Andrew','Yolanda','Bobo']})
+#HERE WE ASSUME THAT ONLY UNIQUE NAME ARE THERE
+
+# HERE WE NEED TO DECIDE ON WHAT COLUMN DO WE NEED TO MERGE TOGETHER SAY HERE WE USE'NAME'
+
+
+#TWO RULES 1. THE ON COLUMN SHOULD BE A PRIMARY IDENTIFIER ,MEANING UNIQUE IDENTIFIER FOR THAT ROW 
+on="name".
+#also how to merge tables on the name column #intitally we start with inner in this case only thosee record will show that match in the both tables.
+
+pd.merge(registrations,logins,how='inner',on='name')
+
+    reg_id	name	log_id
+0	1	Andrew	2
+1	2	Bobo	4
+
+
+
+
+
