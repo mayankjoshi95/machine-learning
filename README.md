@@ -979,4 +979,48 @@ pd.merge(registrations,logins,how='inner',on='name')
 
 
 
+#LEFT MERGER AND RIGHT MERGE HERE THE ORDER DOES MATTER IN WHICH YO WRITE YOUR DATA FRAMES 
+
+
+#HERE REGISTRATION ON THE LEFT HAND SIDE ARE MY LEFT TABLE AND REGISTRATION ON THE RIGHT HAND SIDE WILL BE THE RIGHT TABLE
+
+#HERE EVRYTHING THAT IS IN THE LEFT WILL BE PRSENT AFTER WE APPLY MERGE OPERATION WITH how='left'
+
+pd.merge(registrations,logins,how='left',on='name')#in here as you can see it includes the reg_id and excludes the log_id
+
+    reg_id	name	log_id
+0	1	Andrew	2.0
+1	2	Bobo	4.0
+2	3	Claire	NaN
+3	4	David	NaN
+
+
+pd.merge(registrations,logins,how=right',on='name')#in here as you can see it includes the login_id and excludes the registration_id
+
+    reg_id	name	log_id
+0	1.0	Andrew	2
+1	2.0	Bobo	4
+2	NaN	Xavier	1
+3	NaN	Yolanda	3
+
+
+Outer Join#setting how =outer allow us to include everything in both the table
+Match up on all info found in either Left or Right Table. Show everyone that's in the Log in table and the registrations table. Fill any missing info with NaN
+
+
+pd.merge(registrations,logins,how='outer')
+
+      reg_id	name	log_id
+0	1.0	Andrew	2.0
+1	2.0	Bobo	4.0
+2	3.0	Claire	NaN
+3	4.0	David	NaN
+4	NaN	Xavier	1.0
+5	NaN	Yolanda	3.0
+
+
+
+#NOW HOW TO JOIN ON A INDEX OR COLUMN
+
+
 
