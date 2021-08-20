@@ -1166,6 +1166,21 @@ DATE
 sales.resample(rule='A')##here it is like the grop by object##the series offset alias is given in the lecture notes
 #'A' is for year end frequency
 
+#USING .DT METHOD()
+sales['DATE'].dt.year
+
+0      1992
+1      1992
+2      1992
+3      1992
+4      1992
+       ... 
+335    2019
+336    2020
+337    2020
+338    2020
+339    2020
+Name: DATE, Length: 340, dtype: int64
 
 
 
