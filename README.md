@@ -1022,5 +1022,42 @@ pd.merge(registrations,logins,how='outer')
 
 #NOW HOW TO JOIN ON A INDEX OR COLUMN
 
+####TIME METHOD FOR DATE AND TIME
 
+python has a datetime object containing date and time information 
+#pandas allow us to easily extract information from a datetime object to use feature engineering
+we have a recent timestamped sales data .
+Pandas will allow us to extract information from the timestamp  such as 
+1.Days of the week
+2.weekend or weekdays
+3.AM vs PM 
+
+
+
+
+
+import numpy
+import pandas
+from datetime import datetime
+my_year = 2017
+my_month = 1
+my_day = 2
+my_hour = 13
+my_minute = 30
+my_second = 15
+my_date=datetime(my_year,my_month,my_day)
+my_date
+datetime.datetime(2017, 1, 2, 0, 0)
+my_datetime.year
+
+myser=pd.Series(['Nov 3,1990','2000-01-01',None])
+myser[0]
+'Nov 3,1990'
+
+
+pd.to_datetime(myser)
+0   1990-11-03
+1   2000-01-01
+2          NaT
+dtype: datetime64[ns]
 
