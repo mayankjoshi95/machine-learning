@@ -1183,4 +1183,56 @@ sales['DATE'].dt.year
 Name: DATE, Length: 340, dtype: int64
 
 
+##PANDAS INPUT AND OUTPUT CSV FILES
+
+
+for reading :-df=pd.read_csv('example.csv',index_col=0)
+for writing:-df.to_csv('newfile.csv',index=True)
+new=pd.read_csv("newfile.csv")
+new
+
+
+pwd
+'C:\\Users\\home\\Downloads\\03-Pandas'#where the current file is 
+ls
+to have the list of file in the current directory
+
+
+##PANDAS USE IN THE EXCEL 
+##PANDAS CAN ONLY READ AND WRITE IN RAW DATA ,IT IS NOT ABLE TO READ IN MACROS ,VISUALIZATION OR FORMULAE CREATED INSIDE OF SPREADSHEETS
+##PANDAS TREAT AN EXCEL WORKBOOK AS A DICTIONARY WITH THE KY BEING THE SHEET NAME AND THE VALUE BEING THE DATA FRAME REPRESENTING THE SHEET ITESELF.
+NOTE:-USING PANDAS WITH EXCEL REQUIRES ADDITIONAL LIBRARIES
+
+
+
+import pandas as pd
+df=pd.read_excel('my_excel_file.xlsx',sheet_name='First_Sheet')
+df
+       a	b	c	d
+0	0	1	2	3
+1	4	5	6	7
+2	8	9	10	11
+3	12	13	14	15
+
+
+list all the sheet name we use 
+pd .ExcelFile('my_excel_file.xlsx')
+
+
+wb=pd.ExcelFile('my_excel_file.xlsx')
+wb.sheet_names   
+['First_Sheet']
+
+excel_sheet_dict=pd.read_excel('my_excel_file.xlsx',sheet_name=None)
+excel_sheet_dict#it is a dictionary
+##it is a dictionary where key is the sheet name and the value is the data frame itself
+
+
+{'First_Sheet':     a   b   c   d
+ 0   0   1   2   3
+ 1   4   5   6   7
+ 2   8   9  10  11
+ 3  12  13  14  15}
+ 
+ our_df.to_excel('example.xlsx',sheet_name='First_Sheet',index=False)##to save the data frame to the excel file
 
