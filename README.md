@@ -1236,3 +1236,76 @@ excel_sheet_dict#it is a dictionary
  
  our_df.to_excel('example.xlsx',sheet_name='First_Sheet',index=False)##to save the data frame to the excel file
 
+
+
+###PIVOT TABLES
+##they allow you to reorganize data refactoring cells based on columns and a new index.
+this is best shown visually
+
+
+A data frame with the repeated values can be pivoted for a reorganization and clarity
+
+
+df=pd.read_csv('Sales_Funnel_CRM.csv')
+df
+       Account Number	Company	Contact	Account Manager	Product	Licenses	Sale Price	Status
+0	2123398	Google	Larry Pager	Edward Thorp	Analytics	150	2100000	Presented
+1	2123398	Google	Larry Pager	Edward Thorp	Prediction	150	700000	Presented
+2	2123398	Google	Larry Pager	Edward Thorp	Tracking	300	350000	Under Review
+3	2192650	BOBO	Larry Pager	Edward Thorp	Analytics	150	2450000	Lost
+4	420496	      IKEA	   Elon Tusk	Edward Thorp	Analytics	300	4550000	Won
+5	636685	    Tesla Inc.	Elon Tusk	Edward Thorp	Analytics	300	2800000	Under Review
+6	636685	     Tesla Inc.	Elon Tusk	Edward Thorp	Prediction	150	700000	Presented
+7	1216870	Microsoft	Will Grates	Edward Thorp	Tracking	300	350000	Under Review
+8	2200450	Walmart	Will Grates	Edward Thorp	Analytics	150	2450000	Lost
+9	405886	     Apple	Cindy Phoner	Claude Shannon	Analytics	300	4550000	Won
+10	470248  	Exxon Mobile	Cindy Phoner	Claude Shannon	Analytics	150	2100000	Presented
+11	698032	     ATT	Cindy Phoner	Claude Shannon	Tracking	150	350000	Under Review
+12	698032	    ATT	Cindy Phoner	Claude Shannon	Prediction	150	700000	Presented
+13	902797	     CVS Health	Emma Gordian	Claude Shannon	Tracking	450	490000	Won
+14	2046943	Salesforce	Emma Gordian	Claude Shannon	Analytics	750	7000000	Won
+15	2169499	Cisco	Emma Gordian	Claude Shannon	Analytics	300	4550000	Lost
+16	2169499	Cisco	Emma Gordian	Claude Shannon	GPS Positioning	300	350000	Presented
+
+
+
+licenses=df[['Company','Product','Licenses']]
+licenses
+
+Company	Product	Licenses
+0	Google	Analytics	150
+1	Google	Prediction	150
+2	Google	Tracking	300
+3	BOBO	Analytics	150
+4	IKEA	Analytics	300
+5  Tesla Inc.	Analytics	300
+6  Tesla Inc.	Prediction	150
+7  Microsoft	Tracking	300
+8  Walmart	Analytics	150
+9  Apple	Analytics	300
+10 ExxonMobileAnalytics	150
+11  ATT	Tracking	150
+12 ATT	       Prediction	150
+13CVS Health	Tracking	450
+14Salesforce	Analytics	750
+15Cisco	Analytics	300
+16Cisco  GPS Positioning	300
+
+
+
+pd.pivot(data=licenses,index='Company',columns='Product',values='Licenses')##here we take the pivotted values
+
+Product	Analytics	GPS Positioning	Prediction	Tracking
+Company				
+Google	         150.0	NaN	                  150.0	300.0
+ATT	             NaN	NaN	                  150.0	       150.0
+Apple	300.0	NaN	NaN	NaN
+BOBO	150.0	NaN	NaN	NaN
+CVS Health	NaN	NaN	NaN	450.0
+Cisco	300.0	300.0	NaN	NaN
+Exxon Mobile	150.0	NaN	NaN	NaN
+IKEA	300.0	NaN	NaN	NaN
+Microsoft	NaN	NaN	NaN	300.0
+Salesforce	750.0	NaN	NaN	NaN
+Tesla Inc.	300.0	NaN	150.0	NaN
+Walmart	150.0	NaN	NaN	NaN
