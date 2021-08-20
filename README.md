@@ -1116,4 +1116,56 @@ type(sales.iloc[0]['DATE'])
 str
 
 
+but after
+sales['DATE']=pd.to_datetime(sales['DATE'])
+
+this becomes the date time type
+
+
+sales['DATE'][0].year
+1992
+
+sales=pd.read_csv('RetailSales_BeerWineLiquor.csv',parse_dates=[0])##here it uses the first column as the date time object 
+
+sales['DATE']
+0     1992-01-01
+1     1992-02-01
+2     1992-03-01
+3     1992-04-01
+4     1992-05-01
+         ...    
+335   2019-12-01
+336   2020-01-01
+337   2020-02-01
+338   2020-03-01
+339   2020-04-01
+Name: DATE, Length: 340, dtype: datetime64[ns]
+
+
+##THUS DO PARSING THE DATE FIRST INSTEAD OF pd.datetime
+
+sales=sales.set_index("DATE")
+sales
+
+            MRTSSM4453USN
+DATE	
+1992-01-01	1509
+1992-02-01	1541
+1992-03-01	1597
+1992-04-01	1675
+1992-05-01	1822
+...	...
+2019-12-01	6630
+2020-01-01	4388
+2020-02-01	4533
+2020-03-01	5562
+2020-04-01	5207
+
+
+
+sales.resample(rule='A')##here it is like the grop by object##the series offset alias is given in the lecture notes
+#'A' is for year end frequency
+
+
+
 
