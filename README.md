@@ -1309,3 +1309,61 @@ Microsoft	NaN	NaN	NaN	300.0
 Salesforce	750.0	NaN	NaN	NaN
 Tesla Inc.	300.0	NaN	150.0	NaN
 Walmart	150.0	NaN	NaN	NaN
+
+
+
+
+##How much you have sold to each company 
+
+pd.pivot_table(df,index="Company",aggfunc='sum') or df.groupby('Company').sum()
+#for summing the license number 
+
+
+
+Account Number	Licenses	Sale Price
+Company			
+Google	6370194	600	3150000
+ATT	1396064	300	1050000
+Apple	405886	300	4550000
+BOBO	2192650	150	2450000
+CVS Health	902797	450	490000
+Cisco	4338998	600	4900000
+Exxon Mobile	470248	150	2100000
+IKEA	420496	300	4550000
+Microsoft	1216870	300	350000
+Salesforce	2046943	750	7000000
+Tesla Inc.	1273370	450	3500000
+Walmart	2200450	150	2450000
+
+
+pd.pivot_table(df,index="Company",aggfunc='sum',values=['Licenses','Sale Price'])#in the above examle there is no sense in adding the account no. so here we can use the values
+
+
+
+
+Licenses	Sale Price
+Company		
+Google	600	3150000
+ATT	300	1050000
+Apple	300	4550000
+BOBO	150	2450000
+CVS Health	450	490000
+Cisco	600	4900000
+Exxon Mobile	150	2100000
+IKEA	300	4550000
+Microsoft	300	350000
+Salesforce	750	7000000
+Tesla Inc.	450	3500000
+Walmart	150	2450000
+
+
+
+pd.pivot_table(df,index=['Account Manager','Contact'],values=['Sale Price'],aggfunc='sum')
+
+                                  Sale Price
+Account Manager	Contact	
+Claude Shannon	Cindy Phoner	7700000
+                      Emma Gordian	 12390000
+Edward Thorp	        Elon Tusk	8050000
+                    Larry Pager	5600000
+                    Will Grates	2800000
