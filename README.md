@@ -1061,3 +1061,59 @@ pd.to_datetime(myser)
 2          NaT
 dtype: datetime64[ns]
 
+
+timeser=pd.to_datetime(myser)#it transfer everything to the correct date time format 
+timeser[0].year
+
+
+#how to know something is european date or american date 
+
+obvi_euro_date='31-12-2021'
+pd.to_datetime(obvi_euro_date)
+Timestamp('2021-12-31 00:00:00')#year downto a month to day then hours sec min
+
+
+euro_date='10-12-2000'
+pd.to_datetime(euro_date)
+Timestamp('2000-10-12 00:00:00')#here it assumes that 10 is the month not the date
+
+
+euro_date='10-12-2000'
+pd.to_datetime(euro_date,dayfirst=True)
+Timestamp('2000-12-10 00:00:00')#here we take that day is 10 and months and year is 2000
+
+
+style_date='12--Dec--2000'
+pd.to_datetime(style_date,format='%d--%b--%Y')
+Timestamp('2000-12-12 00:00:00')
+
+
+
+custom_date="12th of Dec 2000"
+pd.to_datetime(custom_date)
+Timestamp('2000-12-12 00:00:00')
+
+
+sales=pd.read_csv('RetailSales_BeerWineLiquor.csv')
+sales
+
+
+
+       DATE	MRTSSM4453USN
+0	1992-01-01	1509
+1	1992-02-01	1541
+2	1992-03-01	1597
+3	1992-04-01	1675
+4	1992-05-01	1822
+...	...	...
+335	2019-12-01	6630
+336	2020-01-01	4388
+337	2020-02-01	4533
+338	2020-03-01	5562
+339	2020-04-01	5207
+
+type(sales.iloc[0]['DATE'])
+str
+
+
+
