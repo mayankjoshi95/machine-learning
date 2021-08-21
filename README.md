@@ -1427,10 +1427,25 @@ plt.title('String title');
 
 #the figure object is not tecchnically visible
 
+##the genral procedure for the figure function in usage
+
 #fig=plt.figure()
-#axes=fig.add_axes([0,0,1,1])  [0,0] is the lower left corner [1,1] is the width and height of the axes it can be [.5,1] or [.5,.5 ] 
+#axes=fig.add_axes([0,0,1,1]) ## [0,0] is the lower left corner [1,1] is the width and height of the axes it can be [.5,1] or [.5,.5 ] 
+#axes.plot(x,y)
+
+This methodology allow us to add in multiple axes as well as move and resize the axes
+
+##in theory we could set the axes side by side using plt.figure() calls ,but typically  it is easier to use plt.subplots() function calls for this 
+##we will explore multiple side by side plots in a future lecture for now lets explore the figure  object methodology for matplotlib
+ 
+ 
+fig=plt.figure()#figsize is the figure size and second is the dpi which is the fidelity of dots per square inch
+axes=fig.add_axes([0,0,1,1])
+axes.plot(x,y)
+plt.show()
 
 
 
+ 
  
  
