@@ -1527,5 +1527,7 @@ hspace = 0.2  # the amount of height reserved for space between subplots,
               
               
 fig.subplots_adjust(wspace=1,hspace=1)
+#in here for setting the x label or the y label it is same as before just set the 
 
+axes[0][1].set_xlabel('A')
 
