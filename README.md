@@ -1430,7 +1430,7 @@ plt.title('String title');
 ##the genral procedure for the figure function in usage
 
 #fig=plt.figure()
-#axes=fig.add_axes([0,0,1,1]) ## [0,0] is the lower left corner [1,1] is the width and height of the axes it can be [.5,1] or [.5,.5 ] 
+#axes=fig.add_axes([0,0,1,1]) ## [0,0] is the lower left corner [1,1] is the width and height of the axes it can be [.5,1] or [.5,.5 ] [.1,.1] 10% of the original height and width 
 #axes.plot(x,y)
 
 This methodology allow us to add in multiple axes as well as move and resize the axes
@@ -1440,9 +1440,27 @@ This methodology allow us to add in multiple axes as well as move and resize the
  
  
 fig=plt.figure()#figsize is the figure size and second is the dpi which is the fidelity of dots per square inch
-axes=fig.add_axes([0,0,1,1])
+axes=fig.add_axes([0,0,1,1])#first two are the x and y axis and next two are the widht and the height ofthe figure
 axes.plot(x,y)
 plt.show()
+
+
+fig=plt.figure(figsize=(12,8),dpi=100)#dots per inch =100 to make it more clear .#dont set it too high as it wil take lots of am for this higher resolution#figure size for size of the figure,to stretch it out a little bit of to make it long
+#LARGE AXES
+axes1=fig.add_axes([0,0,1,1])
+axes1.plot(a,b)
+#SMALL AXES
+axes2=fig.add_axes([.2,.2,.25,.25]) #if i want to be inside that larger plot i must be 20%on the  x axes  
+axes2.set_xlim(1,2)
+axes2.set_ylim(0,50)
+axes2.set_xlabel('A')
+axes2.set_ylabel('B')
+axes2.set_title('Zoomed in')
+axes2.plot(x,y)
+plt.show()
+fig.savefig('new_figure.png',bbox_inches='tight')
+#we have here plot over the previous plot  
+##FIGURE PARAMETER
 
 
 
