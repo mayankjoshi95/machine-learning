@@ -1463,7 +1463,40 @@ fig.savefig('new_figure.png',bbox_inches='tight')
 ##FIGURE PARAMETER
 
 
+##MATPLOTLIB _SUBPLOTS FUNCTIONALITY
 
+plt.subplots() call allows us to easily create Figure and Axes objects in side by side formations
+##plt.subplots()command returns a tuple conntaining  the figure canvas and then numpy array holding the axes objects.
+fig,axes=plt.subplots(nrows=2,ncols=2)#it return a tuple which by common convetion we labeel(fig,axes)
+
+fig:-this is the entire figure canvas 
+axes:-this is a numpy array holding each of the axes according  to position  in the overall canvas.
+
+
+
+
+
+
+plt.subplots()
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+a=np.linspace(0,10,11)
+b=a**4
+x=np.arange(0,10)
+y=x*2
+fig,axes=plt.subplots(nrows=1,ncols=2)
+type(axes)
+numpy.ndarray
+axes[0].plot(x,y)
+#since axes is the numpy array thus we have the graph of x,y in the left figure
+
+axes[1].plot(a,b)
+
+#if in the above if we do nrows=2,ncol=2 then we get an error#here this numpy array is still 2D
+#so now i have to use axes[0][0] to plot on that 
  
  
  
