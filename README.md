@@ -1428,7 +1428,8 @@ plt.title('String title');
 #the figure object is not tecchnically visible
 
 #fig=plt.figure()
-#axes=fig.add_axes([0,0,1,1])  [0,0] is the lower left corner [1,1] is the width and height of the axes
+#axes=fig.add_axes([0,0,1,1])  [0,0] is the lower left corner [1,1] is the width and height of the axes it can be [.5,1] or [.5,.5 ] 
+
 
 
  
