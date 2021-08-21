@@ -1498,5 +1498,34 @@ axes[1].plot(a,b)
 #if in the above if we do nrows=2,ncol=2 then we get an error#here this numpy array is still 2D
 #so now i have to use axes[0][0] to plot on that 
  
+##when nrows=3 and ncols=1
+then there is no need to do 2D kind of thing it is a list atlast i.e the axes
+
+
+##fig,axes=plt.subplots(nrows=3,ncols=1)
+for ax in axes:
+    ax.plot(x,y)
+    
+axes[0].plot(x,y) plot on the first graph
+
+plt.tight_layout()#it ensures that no set of axes overlap
+fig.subplots_adjust()
+#left,bottom,right,top,wspace,hspace(width space ,height space)
+
  
  
+ left = 0.125  # the left side of the subplots of the figure
+right = 0.9   # the right side of the subplots of the figure
+bottom = 0.1  # the bottom of the subplots of the figure
+top = 0.9     # the top of the subplots of the figure
+wspace = 0.2  # the amount of width reserved for space between subplots,
+              # expressed as a fraction of the average axis width
+hspace = 0.2  # the amount of height reserved for space between subplots,
+              # expressed as a fraction of the average axis height
+              
+              
+              
+              
+fig.subplots_adjust(wspace=1,hspace=1)
+
+
