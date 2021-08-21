@@ -1367,3 +1367,69 @@ Claude Shannon	Cindy Phoner	7700000
 Edward Thorp	        Elon Tusk	8050000
                     Larry Pager	5600000
                     Will Grates	2800000
+                    
+                    
+                    
+                    
+                    
+                    
+                    IT 
+                    
+                    
+                    
+                    
+                    
+ ##MATPLOTLIB
+ 
+ 
+ 
+ #VISUALIZING DATA IS CRUCIAL TO QUICKLY UNDERSTANDING TRENDS AND RELATIONSHIP IN YOUR DATASET.
+ #MATPLOTLIB IS ONE OF THE MOST POPULAR LIBRARY FOR PLOTTING WITH PYTHON
+ #MATPLOTLIB IS HEAVILY INSPIRED BY THE PLOTTING FUNCTION OF THE MATLB ROGRAMMING LANGUAGE
+ #IT ALLOWS FOR CREATION OF ALMOST ANY PLOT TYPE AND HEAVY CUSTOMIZATION
+ #THERE ARE TWO SEPRATE APPROACHES TO CREAING PLOT FUNCTIONAL BASED METHOD AND OOP BASED METHOD
+ 
+ 
+ ##FUNCTIONAL BASED METHOD
+ 
+ 
+ plt.plot(x,y)
+ import matplotlib.pyplot as plt ##since we are working with the pypplot region of matplot library 
+ ## for older version we are using %matplotlib inline
+ 
+ 
+ import matplotlib.pyplot as plt
+import numpy as np
+x=np.arange(0,10)
+y=2*x
+plt.plot(x,y)  ##it takes this array to the a particular location and rendering( the visualization
+plt.show() its just rendering the visualization
+## or just put ;in front of plt.plot(x,y)
+
+plt.plot(x,y);
+plt.title('String title');#title 
+
+
+#next 4 lines must be in same block for python to connect to all the title ,x,y label on to a single graph
+plt.plot(x,y);
+plt.xlim(0,6)#to set the limit in the x axis
+plt.ylim(0,15)#to set the limit in the y axis
+plt.xlabel("X Axis")
+plt.ylabel("Y Axis")
+plt.title('String title');
+
+#OOP 
+
+
+#Amore comprehensive Matplot lib OOP API make use of the figure object 
+#we then axe to this fiigure object and then lot those on the axes
+#this allows for very robust control over the entire plot
+
+#the figure object is not tecchnically visible
+
+#fig=plt.figure()
+#axes=fig.add_axes([0,0,1,1])  [0,0] is the lower left corner [1,1] is the width and height of the axes
+
+
+ 
+ 
