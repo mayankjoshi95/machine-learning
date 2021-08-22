@@ -1530,4 +1530,87 @@ fig.subplots_adjust(wspace=1,hspace=1)
 #in here for setting the x label or the y label it is same as before just set the 
 
 axes[0][1].set_xlabel('A')
+#same for other thing also like for the set the limit 
+fig.suptitle("Figurelevel",fontsize=16)#here we place a figure level title with font size 16
+
+fig.savefig('new_subplots.png',bbox_inches='tight')##we have a bounding box that ist'nt going to cuttoff anything 
+
+##Matplot lib styling
+
+##matplot offers very robust styling fnctions that allow us to edit  colors ,legends,line width markers and mch more!
+
+
+x=np.linspace(0,10,11)
+fig=plt.figure()
+ax=fig.add_axes([0,0,1,1])
+ax.plot(x,x)
+ax.plot(x,x**2)
+
+
+##here we donot knoww that it is actually what is i.e is it x vs x or x vs x**2
+##thus we add in the legend
+
+
+ax.plot(x,x,label='X VS X')
+ax.plot(x,x**2,label='X VS X^2')
+ax.legend(loc='upper left)
+
+using this we can place  a legend
+
+#where to place a legend there is an LOc argument i.e upper left ,upper right etc and also there is a number i.e for best there is 0
+upper right 1
+upper left 2
+
+
+
+ax.legend(loc=4)#here we fix the location according to th number 
+ax.legend(loc=(1.1,.5))#here we fix the location by ourself acording to the location
+#also negative can also be done in order to place it at the left of the plot
+
+
+##matplot lib styling based on coloring and styles
+
+
+ax.plot(x,x,color='blue')
+
+ax.plot(x,x,color='#8f4c47')##after going to hex color code  
+
+
+ax=fig.add_axes([0,0,1,1])
+ax.plot(x,x,color='#8f4c47',label='x vs x')#hex color code
+ax.plot(x,x+1,color='#c75048',label='x vs x+1')
+ax.legend()
+
+
+ax.plot(x,x+1,color='#c75048',lw=10)#linewidth =10 that is linewwidth is 10 times the default values i.e 1
+ax.plot(x,x+1,color='purple',linewidth=10,linestyle='--')##instead of lw or ls we can wrtie linewidth and line style
+
+lines[0].set_dashes([1,1,1,2,3,5])#to customize the line style
+
+i want 5 solid point 2 blank point 10 solid point and then 2 blank point
+
+
+x here is not continous 
+array([ 0.        ,  1.22222222,  2.44444444,  3.66666667,  4.88888889,
+        6.11111111,  7.33333333,  8.55555556,  9.77777778, 11.        ])
+        
+lines=ax.plot(x,x+1,color='purple',marker='o',linestyle='--',markersize=20,markersize=20,markerfacecolor='red',markeredgewidth=8,markeredgecolor='orange')
+#there are many thing like 
+1.setting a logarithmic scale axes[1].set_yscale("log")
+
+
+
+
+
+
+
+
+
+##SeaBorn
+
+
+1.Seaborn is a statistical plottingg library that is specifically designed to interact well with pandas data frames to create common statistical plot types.
+2.seaborn use sa simple one line syntax
+
+
 
