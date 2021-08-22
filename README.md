@@ -1699,3 +1699,59 @@ THERE ARE 3 MAIN DISTRIBTION PLOT TYPES:
 IT IS A SIMPLEST DISTRIBUTION PLOT AND MERELY ADDS A DASH AND TICK LINE FOR EVERY SINGLE VALUES ALONG X AXIS
 THUS Y AXIS DOESNOT HAVE ANY MEANING FOR THE RUG PLOT
 
+IN THE RUG PLOT IF WE COUNT HOW MANY TICKS THERE ARE PER X  RANGES WE CAN CREATE A HISTOGRAM
+3 STEPS ARE THERE 
+
+1.WE SEE HOW MANY CHUNKS WE CAN CUT X AXIS INTO  (FOR EX:-FOR 30 WE HAVE THREE VALUES)
+2.THE WE CREATE A BAR AS HIGH AS THE COUNT
+
+#WE CAN ALSSO y AXIS AS THE PERCENT
+#WE CAN INCREASE THE NNUMBER OF BINS TO TRY TO GET MORE DETAILS
+#BUT GOING TO HIGH ON THE BIN COUNT LEAD TO SOME BIN COUNTS TO BE COMPLETELY EMPTY
+
+##KERNEL DENSITY ESTIMIATION
+
+WE PLOT THE GRAPH ON TOP OF THE HISTOGRAM LEADS TO TELL US WHAT PROBABILITY FUNCITON FUNCTION LOOK LIKE FO THIS PARTICULAR DATA SET
+
+
+#KDE (KERNEL DENNSITY ESTIMATION IIS A METHOD OF ESTIMATING PROBABILITY DENSITY FUNCTION OF A RANDOM VARIABLE 
+
+#IN SIMPLE TERMS IT IS A WAY OF ESTIMATING A CONTINUOS PROBABILITY CURVE FOR A FINITE DATA SAMPLE 
+
+1. START WITH THE RUG PLOT 
+2.WHAT KERNEL WE USE (I.E WHAT PORBABILITY DISTRIBUTON YOU WANT TO TAG ON PROBABILITY DISTRIBUTION ON EACH OF THESE TICK)#THE MOST COMMON IS THE GAUSSIAN DISTRIBUTION
+3. WHAT WE ARE GOING TO DO IS TO STACK A NORMAL DISTRIBUTION ON TOP OF EACH OF THESE RUG TICK THUS WE HAVE A GAUSIAN CURVE THAT IS CENTERED AT THAT TICK.
+4. ADD THESE ALL CURVE 
+5. WE END UP WITH KERNEL DENSITY ESTIMATION PLOT THUS THIS CURVE IS CONTINOUS 
+ALSO SOMETIMES IT HAPPEN THAT WE HAVE TO DO THE HARD CUTTOFF AS THERE IS  A PART OF THE GRAPH THAT DONOT HAVE ANY VALUES .
+
+
+plt.figure(figsize=(5,8),dpi=200)
+sns.rugplot(x='salary',data=df)
+
+
+
+##sns.distplot##distribution plot
+##sns.histplot
+
+
+sns.set(style='darkgrid')
+sns.displot(x='salary',data=df,linewidth=4,edgecolor='red',linestyle='--')#displot is more genralized version so throughtout the course we use the displot
+sns.histplot(data=df,x='salary')
+
+sns.set(style='darkgrid')
+sns.displot(x='salary',data=df,kde=True,rug=True)#here we have been shown the rug plot ,the kde plot ,the distribution (histogram plot)
+
+sns.kdeplot(x='salary',data=df)#the kdeplot only is shown through this
+
+
+##NumPy random seed is simply a function that sets the random seed of the NumPy pseudo-random number generator. It provides an essential input that enables NumPy to generate pseudo-random numbers for random processes.
+
+
+
+sns.rugplot(data=sample_ages,x='age')  #it gives us the rug plot it is a uniform plot
+sns.displot(data=sample_ages,x='age',bins=30)#as we increase bins then we can see way less ticks on those particular bar 
+sns.kdeplot(data=sample_ages,x='age',clip=[0,100],bw_adjust=.6)#it draws a kde plot##samller bandwidht wil pick up lots of variance here so we can make this a little larger and now we pick up more and more of that actual variance #but is we increase much than we get more and more of the general distribution.
+#in order to remove the the extra part coming in the kde plot we use clip
+#bandwidth adjust 
+
