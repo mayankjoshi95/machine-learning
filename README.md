@@ -1612,5 +1612,90 @@ lines=ax.plot(x,x+1,color='purple',marker='o',linestyle='--',markersize=20,marke
 1.Seaborn is a statistical plottingg library that is specifically designed to interact well with pandas data frames to create common statistical plot types.
 2.seaborn use sa simple one line syntax
 
+##we tradeofff customization for ease
+we can still make 
+#sns.scatterplot(x='salary',y='salary',data=df)
 
+
+##Seaborn takes in a pandas dataframe and then the user provides the corresponding string column names for x and y (depending on the plot type)
+
+
+##how do i choose what plot to use
+
+IT depend on what question is there you are trying to solve like google image searching chooses a "lot of visualization " will use many flowchart
+
+
+
+##SECTION TOPIC
+SCATTER PLOTS
+DISTRIBUTION PLOTS
+CATEGORICAL PLOTS
+COMPARISION PLOTS
+SEABORN PLOTS
+MATRIX PLOTS
+
+##Scatter plot wiith the seaborn 
+
+#Scatter plot show the relationship between two continous feature  
+#3continous features are numerical variables that takes any number of values between anny two values
+continuos freatures examples
+1 age is say for year month day  hours minutess second
+2.height :- say someone is 1m tall oor in cm or in nm
+3.salry 
+4.temperature
+5.prices 
+
+#continous feature allows for a values to be always between two values 
+#these are not to be confused with categorical feature which represent distinct and unique categories:
+colors
+shape 
+names
+
+#scatter plots line up a set of two continous feature and plot them out  as coordinates.
+plt.figure(figsize=(12,4),dpi=200)
+
+sns.scatterplot(x='salary',y='sales',data=df,hue='level of education,palette='Dark2',size='salary')#thus the bigger your salary is the bigger your size is .
+
+
+
+
+###HUE:-the hue paraemter takes in a column and it is going to ask for what should you color these plots by that by what category should we color them 
+#hre ussing hue i am able to show 3D information
+#hue can be by the continous column or a categorical one.
+
+
+##how to chose the colors
+
+https://matplotlib.org/stable/tutorials/colors/colormaps.html
+so we choose a pallette of colors  
+
+
+#alpha wiht htiss many point we get many points right on top of another point to elviate this we can set the alpha parameteer an alpha paratemter 
+alpha =0 is fully transparent(white) and alpha =1 i it is fully opaque i.e default lets say we take in between alpha =.2 then we can see the transparency i.e where there is more points over the other and find which are more occuring.
+
+
+
+##Style Parameter
+
+#i can have markers to be plus ,triangle etc
+sns.scatterplot(x='salary',y='sales',data=df,s=200,style='level of education',hue='level of education')
+
+
+##MAIN THING IS THAT YOU DEFINE YOUR X DEFINE YOUR Y AND DEFINE YOUR DATA EVERYTHING AFTER THAT IS JUST STYLING AND CUSTOMIZING
+
+
+
+##DISTRIBUTION PLOTS
+
+
+IT DISPLAYS A SINGLE CONTINOUS FEATURE AND HELP VISUALIZE PROPERTIES SUCH AS DEVIATION AND AVERAGE VALUES .
+THERE ARE 3 MAIN DISTRIBTION PLOT TYPES:
+1.RUG PLOT
+2.HISTOGRAM
+3.KDE PLOT#KERNEL DENSITY ESTIMATION
+
+##EXPLORING THE DISTRIBUTION OF EMPLOYEEE SALARIES 
+#ONE WAY IS THE RUG PLOT
+IT IS A SIMPLEST DISTRIBUTION PLOT AND MERELY ADDS A DASH AND TICK LINE FOR EVERY SINGLE VALUES ALONG X AXIS
+THUS Y AXIS DOESNOT HAVE ANY MEANING FOR THE RUG PLOT
 
