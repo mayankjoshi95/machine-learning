@@ -1751,7 +1751,134 @@ sns.kdeplot(x='salary',data=df)#the kdeplot only is shown through this
 
 sns.rugplot(data=sample_ages,x='age')  #it gives us the rug plot it is a uniform plot
 sns.displot(data=sample_ages,x='age',bins=30)#as we increase bins then we can see way less ticks on those particular bar 
-sns.kdeplot(data=sample_ages,x='age',clip=[0,100],bw_adjust=.6)#it draws a kde plot##samller bandwidht wil pick up lots of variance here so we can make this a little larger and now we pick up more and more of that actual variance #but is we increase much than we get more and more of the general distribution.
+sns.kdeplot(data=sample_ages,x='age',clip=[0,100],bw_adjust=.6,shade=True)#it draws a kde plot##samller bandwidht wil pick up lots of variance here so we can make this a little larger and now we pick up more and more of that actual variance #but is we increase much than we get more and more of the general distribution.
 #in order to remove the the extra part coming in the kde plot we use clip
 #bandwidth adjust 
+
+
+
+##CATEGORICAL PLOTS
+
+HERE THESE PLOTS WILL DISPLAY  ASTATISTICAL METRICS  PER A CATEGORY
+FOREX:-MEAN VALUE PER CATEGORY OR COUNT OF THE NUMBER OF ROWS PER CATEGORY
+#IT IS THE VISUALIZATION EQUIVALENCE OF A GROUP BY CALL
+
+#THERE ARE TWO MAIN TYPE OF THE PLOT
+1. countplot(_
+IT COUNTS THE NUMBER OF ROWS PER CATEGORY
+2. barplot()
+GENERAL FORM OF DISPLAYING ANY CHOSEN METIRC PER CATEGORY 
+we could plot out the mean value annd standard deviation per category
+
+
+df['division'].value_counts()
+office supplies      252
+printers             250
+peripherals          243
+computer hardware    159
+computer software     96
+Name: division, dtype: int64
+
+or 
+
+sns.countplot(data=df,x='division')
+plt.ylim(90,260)
+sns.countplot(data=df,x='level of education',hue='division')#hue divide level of education to more divisions
+
+countplot is special case of bar plot
+
+df['level of educatioon'].value_counts()#estimator is for various mean variance etc .#but mean is the default value#ci is the confidence interval
+sns.barplot(data=df,x='level of education',y='salary',estimator=np.mean,ci='sd',hue='division'
+
+
+
+##Distribution within the categories
+
+
+1.boxplot(more common)
+2.violinplot
+3.swarmplot
+4.boxenplot(letter-value-plot)
+
+
+
+Boxplot displays the distribution of a continuos variable .
+it does thsi through the use of quartiles.
+quartiles seperate out the data into 4 equal number of datapoints 
+1.25%of the data points are in bottom quartile and 25 % in the tp quartile
+2.50th percentiile (Q2)is the median( it is the line in the middle taht splits the data in half)
+#the bos is the interquartile range IQR is the box width it is basically middle 50% of all data points
+#out of 50%percent point inside the boox 25th percentile is within the Q1 and 75th percentile within Q3
+#Q1 it seperate the line for the bottom 25%of the data points 
+#Q3 seperate the line of the above 25%of the data points #highest 25%of all data points are above Q3
+#whiskers are defined by 1.5 *IQR
+anything outside of this 1.5 range are going to be said as the outiers
+
+
+#boxplot can quickly give statistical distribution inforamtion in a visual format.
+
+
+thus we can create box plot per category
+
+
+
+VIOLINPLOT
+
+
+
+
+plays the similar role as the boxplot .
+1.it displays the probability desity across the data using a KDE 
+2.we can imagine it as a mirrored KDE plot
+3.WHite dot in the middle is actually going to be the median.
+4.Box within this violin plot is going to be the interquartile range
+
+
+
+
+
+#swarmplot  is a very simple and simplyshows all the data points in the distribution.
+#for very large data set it won't show all the points,but will display  the general disstribution of them 
+
+##it  is not mirrored
+
+
+
+
+
+#the boxen plot
+
+
+1.it is desinged as an expansion to normal box plot
+2.it shows letter value qunatiles  to display against standard boxplot
+
+
+#creating the plot
+##boxplot
+plt.figure(figsize=(10,4),dpi=200)
+sns.boxplot(data=df,y='math score',x='parental level of education',hue='test preparation course')
+plt.legend(bbox_to_anchor=(1.05,1))
+
+
+
+sns.violinplot(data=df,y='math score',x='parental level of education',hue='test preparation course',split=True,inner =None )#split lead to one half of the violin be none and other half to be completed #inner =None will remove that bar
+#these violin plot are harder to compare compared to the box plot
+#inner ='quratile'#quartile for each KDE is drawn
+#inner ='stick' going to draw line for every instance
+#bw:- for essentially how much noise you want to pick up for stacking and summing up those gaussian distribution so if bw=.1 then KDE are going to pick up lots of noise
+#thus the less bw is more noise we are going to pick up and more it is less noise we are going to pick up
+#but if you ake bandwidth to large they all start to look the same
+
+
+
+
+
+##swarmplot
+#sns.swarmplot(data=df,x='math score',size=2) for size =2 as by default size is large leadin to not all points are covered
+
+plt.figure(figsize=(8,4),dpi=200)
+sns.swarmplot(data=df,x='math score',y='gender',size=2,hue='test preparation course',dodge=True)#here we seperate out the swarm plot based on the gender
+#dodge seperates out the two plot.
+
+
 
