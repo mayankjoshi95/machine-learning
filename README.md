@@ -1948,3 +1948,117 @@ sns.pairplot(data=df,hue='gender',diag_kind='hist',corner=True)
 #corner =True get rid of the duplicate values 
 
 
+
+
+#GRID PLOT 
+
+
+Seaborn grid calls use Matplotlib subplots() to automaticaly create a grid based off a categorical column.
+Instead of passing in a specific number of cols or rows for the subplots ,we can simply pass in thhe names of the column  and seaborn will automatically map the subplots grid
+many of the seaborn's built in plot calls are running on the top of the grid system .
+directly calling the grid system  allow user to heavily customize plots.
+
+#FOR SEABORN GRID SYSTEM TWO TYPES OF PLOTS CAN BE USED 
+
+1. catplot()  
+sns.catplot(data=df,x='gender',y='math score',kind='box',row='lunch')
+#each row represent a different lunch type 
+sns.catplot(data=df,x='gender',y='math score',kind='box',col='lunch')
+#here each column is based of some lunch type 
+
+
+
+sns.catplot(data=df,x='gender',y='math score',kind='box',col='lunch',row='test preparation course')
+#for grid go for 2*2 the maximunm size 
+
+
+
+2.pairgrid()
+
+sns.pairplot(df)##essentially what is happening as this is calling the pair grid functionality which creates the grid and just fills it in
+
+
+
+sns.PairGrid(df)#after thisit is waiting for us to provide mapping command taht it wants us to provide
+
+#g=g.map_upper(sns.scatterplot) # for upper diagonal 
+g=g.map_lower(sns.kdeplot)
+g=g.map_diag(sns.histplot)#fro diagonal it is better to use the histogram instead of scatter plot
+
+
+
+
+
+
+
+#MATRIX PLOT 
+
+
+MATRIX PLOT ARE THE CISUAL EQUIVALENT OF DISPLAYIN GA PIVOT TABLE 
+THE MATRIX PLOT DISPLAYS  ALL THE DATA  PASSED IN ,VISUALIZING  ALL THE NUMERIC VALUES IN A DATA FRAME
+
+NOTE:-NOT EVERY DATAFRAME IS A VALID CJOICE FOR  A MATRIX PLOT SUCH AS HEAT MAP
+
+
+#THE TWO MAIN TYPES OF MATRIX PLOT IS THE 
+
+1. heatmap():-it visually displays the distribution of cell values with a color mapping
+2. 2.clustermap():-same visual as heat map but first conducts hierarchial clustering to reorganize data into groups 
+3. #at first sea born group together a very similar data rows or data columns to see which grouping are very siimilar before visualizing with color
+
+
+
+#HEAT MAP 
+
+
+#PASSING THE DATA FRAME INTO THE HEAT MAP NOW I ONLY HAVE THE RATE COLUMN
+
+#NOTE THAT HEAT MAP SHOULD IDEALLY HAVE ALL THE CELLS BE INTHE SAME UNIT,SO THE COLOR AMPPPING MAKES MORE SENSE  ACROOS THE ENTIRE DATAFRAME 
+
+#IF WE ADD THE AGE THEN WE CAN SEE IT IS OF DIFFERRENT UNIT THAN THE RATE THUS IT IS OF DIFFERNET COLOR 
+
+#THUS THIS IS THE REASON EVERY DATA FRAME CANNOT BE PASSED INTHE HEAT MAP AS ALL THE CELL ARE INN THE DIFFERETN UNIT AS AGE IS IN THE YEARS
+
+
+
+#heatmap here have to drop life expectancy 
+sns.heatmap(df.drop('Life expectancy',axis=1),linewidth=.5,annot=True,,cmap='viridis')#annot means we can ask to have the values,#viridis in this case extreme jump out a littlemore 
+
+
+#to centre the colormap
+
+
+#for the cluster map
+plt.figure(dpi=200)
+sns.clustermap(df.drop('Life expectancy',axis=1),linewidth=.5,annot=True,cmap='viridis',col_cluster=False)  #col_cluster is not there
+
+
+
+
+
+
+
+#CAPSTONE PROJECT
+
+
+RECALL IN AMACHNELEARNING PATHWAY WE HAVE A DATA ANALYSIS PROBLEM WE NEED TO
+1.COLLECT & STORE DATA:-SCRAPE REVIEW OF VARIOUS WEBSITES
+2.CLEAN &ORGANIZE DATA:-PANDAS TO ORGANIZE THE DATA REFORM IT SEABORN TO VISUALIZE IT .
+3.EXPLORATORY DATA ANALYSIS(REPORT ,VISUALIZATION,COMMUNICATION THESE THINGS TO ANSWER KEY QUESTION):-USE SEABORN TO EXPLORE
+4.DATA ANALYSES
+5.MAKE DECISION AND ANSWER KEY QUESTION:-DOES FANDANGODISPLAY ARTIFICIALLY HIGHER THAN AVERAGE REVIEW?
+
+
+#FANDANGO HAS TWO RATING 
+
+STARS:-
+1.RATING IN STARS 0-5 DISPLAYED ON THEIR WEBSITE  HTML
+RATING:-
+1.ACTUAL TRUE RATING NUMERICALLY SHOWN ON THE MOVIE PAGE
+
+
+
+FIRST WE WILL CHECHK TWO RATINGS  AND COMPAE THESE RATING TO CHECK FOR DISCREPENCIES
+SECONDLY CHECK FUNDANGO RATING TO OTHER WEBSITES AND SEE IF THERE IS A SKEW .
+
+
