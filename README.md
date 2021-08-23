@@ -1881,4 +1881,70 @@ sns.swarmplot(data=df,x='math score',y='gender',size=2,hue='test preparation cou
 #dodge seperates out the two plot.
 
 
+#boxen plot
+sns.boxenplot(x='math score',y='test preparation course',data=df,hue='gender')
+
+
+
+
+
+##COMPARISION PLOTS
+
+
+COMPARISION PLOTWS ARE BASICALLY 2D verision of all the plots we have learned so far
+
+
+the two main plot type we have discussed 
+1.jointplot()
+2.pairplot()
+
+
+jointplot()#essentially allow us to tell the relationship between the math score or the reading score 
+#we can map histogram to each feature of the histogram to clarify the distribution within each feature
+#we can also adjust  the scatter plot to be  a hex or a 2D     KDE plot
+#the basic joinplot is the scatter plot of two continous feature that adds in the histogram
+#hexagons are dark the more points fall into that area
+
+
+#2D KDE plots show shaded distribution between the both KDE 
+
+
+
+
+###pairplot()
+
+
+
+##the pairplot is qquick way to compare all numerical columns in a DataFrame 
+
+#it automatically creates  a histogram for each column and a scatter plot comparision between  all possible combination of column
+
+##pairplot  can be CPU or RAM intensive for large Data Frames  with many column 
+##it is a good idea to filter down only to a column that ou are interested in 
+
+here also we can add in the hue parameter
+#3also we change our diagonal to the kde 
+
+
+##CODING THE PLOT
+
+sns.jointplot(data=df,x='math score',y='reading score',kind='hex')
+kind ='hex' means we have darker hexaagon where there are many points 
+kind='kde' replace the hisstogram and shows us this KDE 
+
+
+sns.jointplot(data=df,x='math score',y='reading score',hue='gender')
+
+#PAIR PLOT
+
+
+sns.pairplot(data=df)
+#herre we have the same plot along the diagonal 
+#using 'hue ' leads to diagonal to be the KDE for you
+#if you want the diagonal to be the histogram use diag_kind='hist'
+
+#it will took some more time to process as it deal with whole dataframe
+sns.pairplot(data=df,hue='gender',diag_kind='hist',corner=True)
+#corner =True get rid of the duplicate values 
+
 
