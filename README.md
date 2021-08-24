@@ -2348,5 +2348,132 @@ y(hat)j is the function of beta and features =sum(i=0 to i=n)(betai) *xij
 ##THUS TAKE THE DRIVATIVE WITH RESPECT TO THE BETA VALUES #NOTEE IT IS NOT SCALABLE  TO TRY TO GET  AN ANALYTICAL SLUTION TO MINIMIZE THIS COST FUCNITON 
 THUS WE USE GRADIENT DESCENT .TO MINIMIZE THE COST FUNCTION
 
+#GRADIENT DESCENT 
+
+
+HERE WE BRING THE MACHINE PART TO THE MACHINE LEARNING
+
+
+#PRACTICLE WAY TO SOLVE THIS PROBLEM OF THE BETA VALUES 
+#instead we can describe this cost function through vectorized matrix notation and use gradient descent to hve a computer figure out the set of beta coefficient valuees that minimize the cost/loss fucntion 
+
+
+
+
+GOAL :- 
+FIND A SET OF BEETA COEFFICITENT  VALUES THAT MINIMIZES  THE ERROR (COST FUNCTION )
+IT LEVERAGE THE COMPUTATUIONAL POWER INSTEAD OF HAVING TO MANUALLY ATTEMPT TO ANALYTICALLY SOLVE THE DERIVATIVE
+
+
+RECALLING THAT OUR DATA CAN BE OF THHE FORM  OF A MATRIX X AND THE VECTORS OF LABELS  Y THUS WE CAN EXPRESS BETA FOR EACH FEATURE I.E B0,B1,B2...BN THUS BETA CAN BE DEFINED AS A VECTOR .
+
+THUS WE CAN USE A GRADIENT TO EXPRESS THE DERIVATIVE OF THE COOST FUCNTION WITH RESPECT TO EACH BETA VALUE .
+
+NOW WHAT IS THE BEST WAY TOO GUESS THE CORRECT BETA  VALUE THAT MINIMIZEs the gradient .
+
+
+genral process of the gradient Descent 
+1.Calculate the gradient at intial point 
+2.move in a step size proportional to the negativee  gradient 
+3.repeat until you found the minimum
+
+
+in genral contour are used instead of 3D plot 
+
+for beta value more that 2 we can't visualize it .
+
+
+#PROGRAM 
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+df=pd.read_csv('C:\\Users\\home\\Downloads\\DATA\\Advertising.csv')
+TV	radio	newspaper	sales
+0	230.1	37.8	69.2	22.1
+1	44.5	39.3	45.1	10.4
+2	17.2	45.9	69.3	9.3
+3	151.5	41.3	58.5	18.5
+4	180.8	10.8	58.4	12.9
+df['total spend']=df['TV']+df['radio']+df['newspaper']+df['sales']
+sns.scatterplot(data=df,x='total spend',y='sales')#HERE WE CAN SEE IN THE PLOT THAT WE GET A LINEAR PLOT
+
+
+
+sns.regplot(data=df,x='total spend',y='sales')#it shows the line of best fit .i.e a regression line using ordinary least square.
+#now we will use np.polyfit that is going to send B0 AND B1 for degree =1
+#y=B1x+B0
+np.polyfit(X,y,deg=1)
+#array([0.04710145, 3.90119955])
+#THUS NOW FOR ANY X it will predict y .
+#thus for any total spend it can predict sales
+
+potential_spend=np.linspace(0,500,100)
+predicted_sales=0.04710145*potential_spend+3.90119955
+sns.scatterplot(x='total spend',y='sales',data=df)
+plt.plot(potential_spend,predicted_sales)
+
+#you will see the scatter plot across the straight line #thus now we have scatterplot above the straight line similar to what replot function has did
+
+
+
+np.polyfit(X,y,3)
+array([ 2.64617556e-07, -1.67427728e-04,  7.71590458e-02,  2.50495056e+00])
+
+#first vale is for x^3 2nd for x^2 3rd for x fourht is for x^0
+
+
+pot_spend=np.linspace(0,500,100)
+pred_sales= 2.64617556e-07*pot_spend**3-1.67427728e-04*pot_spend**2+7.71590458e-02*pot_spend+2.50495056e+00
+sns.scatterplot(x='total spend',y='sales',data=df)
+plt.plot(pot_spend,pred_sales)
+
+
+
+
+#Scikit learn is a library containing many machine learning algorithm .
+#the most important thing is that it utilizes  ageneralised "estimator API "framework to use or call the modelss tha twe are going to be creating 
+#scikit learn refers to all the machine learning algorithm as estimator as at the end all the machine learnng algorithm will estimate the output 
+#this means that the way all the algorithm are imported ,fitted ,and used is uniform across all the algorithhm 
+
+
+
+#this allow user to easily swap algorithm  in an =d out  and test various  approaches and algorithm .
+
+#the uniform framework is so easy to use user can easily applyallost any algorithm  effectively without  truly understanding what the algorithm truly is .
+
+
+#it also comes with many convinience tools ,including  train test split functions cross validation tools and variety of reporting metric fucntions 
+
+#thus scikit learn is one stop shop for may of our need 
+
+
+#scikit learn :-its approch is based on we are going to train this model  on a set of data and then essentially see how this set of model work on the unknown data .
+(supervised learning)
+#we alsoo have to see how well our model is performing
+
+
+#statsmodels pyhton library if interested in statistical model .
+
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y)# so train_test_split do is it take sthe X features an dthe y label an diit makes the four componet for you .#it is just tuple unpacking 
+
+
+#ALSO TO COMPARE THEM TO THE Y TEST LABELS
+
+#IN GENERAL FRAME WORK FOR ESSENTIALLY ANY SUPERVISED LEARNING ALGORITHM
+
+from sklearn .model_family(linear model,ensemble model,some model family  ) import ModelAlgo(linear regresion)
+#then create instance of that model
+mymodel=ModelAlgo(param1,param2)
+#now to train the model we pass inthe training set data
+mymodel.fit(X_train,y_train)
+#then to get the predictions
+predictions=mymodel.predict(X_test)
+from sklearn.metrics import  error_metric
+performance=error_metric(y_test,predictions )
+
 
 
