@@ -2241,6 +2241,10 @@ SOLUTION
 
 3. THEN WE FIT AND TRIN THE MODEL AND WE EVALUATE ITS PERFORMANCE ABSED ON THE TEST SET 
 
+4.IF YOU ARE UNSATISFIED WITH THE PERFORMANCE ONT HE TEST SET YOU CAN GO BACK AND ADJUCST YOUR MODEL PARAEMETER AND RETRAIN THE MODEL ON THE TRAINING DATA SET  
+THEN EVALUATE THIS ADJUSTED MODEL BASED ON THE TEST DATA SET REPEAT THIS PROCESS A S NECESSARY .
+5. THEN WE CAN DEPLOY THE MODEL TO THE REAL WORLD 
+6. THEN WE CAN DEPLOY THE MODEL AS A SERVICE ,DASHBOARD APPLICAITON ,THEN CREATED DATA PRODUCT TO PREDICT THE OUTCOME GAIN INSIGHT ON THE DATA .  
 #NOW HOW TO SPLIT AND WHY TO SPLIT 
 
 TRAIN AND TESTT SET IS THERE TO FAIRLY EVALUATE THE PERFORMANCE OF OUR MACHINE LEARNING MODEL
@@ -2252,6 +2256,97 @@ TRAIN AND TESTT SET IS THERE TO FAIRLY EVALUATE THE PERFORMANCE OF OUR MACHINE L
 
 
 WE HAVE FEATURE FOR TRAING OR LABELS FOR TRAINING AND WE ALSO HAVE XTRAIN Y TRAIN X TEST Y TEST ( SAME USED IN THE PYTHON) 
+
+
+
+
+
+#LINEAR REGRESSION 
+1. THEORY OF LINEAR REGRESSION 
+2. SIMPLE IMPLEMENTATION WITH PYTHON 
+3. SCIKIT-LEARN OVERVIEW 
+4. LINEAR REGRESSION WITH SCIKIT LEARN 
+5. PLOYNOMIAL REGRASSION 
+6. REGULARIZATION 
+7. OVERIEW OF PROJECT DATA SET 
+
+
+
+LINEAR REGRESSION 
+
+
+LINEAR RELATIONSHIP IMPLIES SOME CONSTANAT SPACE TIME RELATIONSHIP
+#SIMPLEST POSSIBLE IS Y=X
+NOW BAED ON X=[1,2,3] AND Y=[1,2,3] WE CAN BULID OUT SOME THEORITICAL RELATIONSHIP Y=X I DON'T KNOW IF THIS IS TRUE RELATIONAHSIP BETWEEN THESE THREE POINTS BUT IT ESSENTIALLY HAS A PERFECT FIT IMPLYING FOR A NEW VALUE X=1.5 I CAN DECIDE WAHT IS THE VALUE OF THE  Y 
+
+
+BUT WITH REAL DATA ITS SI NOT GOING TO FIT PERFECTLY ON REAL LINE  HTUS WE HAVE TO DO IS TOO BASICALLLY DECIDE TO WHERE TO DRAW THIS LINE OF BEST FIT  
+
+FUNDAMENTALLY WHAT WE DO NEED TO MINIMIZE IS THE DISTANCE BETWEEN THE POINTS AND THE LINE
+
+THE ERROR IS CALLED THE RESIDUAL ERROR . #THUS WE TRY TO MINIMIZE THI RESIDUAL ERROR 
+
+ORDINARY LEAST SQUARES WORKS BY MINIMIZING THE SUM OF THE SQAURES OF THE DIFFERENCE BETWEEN THE VALUES OF THE VARIABLE BEING OBSERVED AND THOSE PREDICTED BY THE LINEAR FUCNTION
+
+
+
+##ORDINARY LEAST SQUARES 
  
  
+ WE KNOW THAT THE EQUATION OF A LINE IS Y=mX+b here we have one X is instance of  feature  and Y is the label (or what we want to predict )
+ m is the slope b is the intercept these things are going to be later on fixed 
+ ##so OLS will allow us to directly solve  for the slope m and intercept b for the given input feature X and the output Y #LATER WE SEE ONLY IF WE AHVE MULTIPLE FEATURE WE USE GRADIENT DESCENT TO SCALE THIS 
+ 
+ 
+ 
+ ##TRANSLATE THIS DATA INTO A GENERALIZED MATHEMATICAL NOTATION
+ 1. I WIL SAY I AHVE A MATRIX X CONTAINING MULTIPLE FEATURES AND VECTOR Y CONTAINING LABEL THAT I AM TRYING TO PREDICT 
+ 2. 2.X->x1,x2,x3 intheory it could go to xn nuber of features and now insted of price i am to predict my Y
+ 3. then for each say x1 we ahve a superscript for the row and subscript for the feature and then same for rest of the data point 
+ 
+ 
+
+
+linear regression
+1. basically each feature should have a beta and the final output yhat(my prediction )=beta1 x1+beta2 x2+ beta3 x3... +betan xn (i.e we have n number of feature in our data set)(this we hve a line equation )
+
+2. n a linear regression where we try to formulate te relationship between  variables y=mx+b becoomes => y (hat)=b0+b1*x
+
+our goal is to predict hte dependent variable(y) based on that  of an independent variable (x)
+
+b1=phox,y * sigma y/sigma x  (phox,y is the correlation coefficient ,sigma x ,sigma y are the standard deviation )
+
+#b1=sum(xi-x(bar)(yi-y(bar))/sum((xi-x(bar))^2)
+#b0=ybar-b1*x(bar)
+
+
+#BUT AS THE NUMBER OF FEATURES INCREASES  AN ANALYTICAL SOLUTON BECOME UNSCALABLE 
+#SO INSTEAD OF OLS WE SHIFT FOCUS ON MINIMIZING A COST FUNCTION  WITH GRADIENT DESCENT .
+
+#SO WE ARE GOING TO TO USE GRADIENT DESCENT TO SOLVE ACOST FUCNTION  TO CALCULATE BETA VALUES WHEN WE ARE DEALING WITH MORE THAN ONE FEATURE 
+#THIS LEAD TO SCALE N NUMBER OF FEATURE GIVEN A GENRALIZED FORMULA 
+
+
+
+##COST FUNCTION
+
+WE HAVE DECIDED THE BEST FIT  AS MINIMIZING THE SQUARED ERROR 
+y(hat)=sum(i=0 to i=n)( bi* xi)
+
+
+residual error =yj(true )-y(hat)j
+##AVERAGE SQUARE ERROR FOR MY PREDICTION
+(sum(j=1 to j=m)(yj(true )-y(hat)j)^2)/m #summation of all the errors for m row is this
+
+#cost function j
+J(beta)=this is cost function defined by some measure of error .thus we need to minimize the cost function i.e we need to minimize the cost fucntion i.e minimize the cost function=(sum(j=1 to j=m)(yj(true )-y(hat)j)^2)/2*m
+
+#Recall to minimize we are taking some derivative and reduce it to zero thus 2 is put to ease the clculation
+y(hat)j is the function of beta and features =sum(i=0 to i=n)(betai) *xij
+
+
+##THUS TAKE THE DRIVATIVE WITH RESPECT TO THE BETA VALUES #NOTEE IT IS NOT SCALABLE  TO TRY TO GET  AN ANALYTICAL SLUTION TO MINIMIZE THIS COST FUCNITON 
+THUS WE USE GRADIENT DESCENT .TO MINIMIZE THE COST FUNCTION
+
+
 
