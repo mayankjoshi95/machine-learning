@@ -2456,16 +2456,16 @@ plt.plot(pot_spend,pred_sales)
 
 #statsmodels pyhton library if interested in statistical model .
 
-
+#IN GENERAL FRAME WORK FOR ESSENTIALLY ANY SUPERVISED LEARNING ALGORITHM
 from sklearn.model_selection import train_test_split
-X_train,X_test,y_train,y_test=train_test_split(X,y)# so train_test_split do is it take sthe X features an dthe y label an diit makes the four componet for you .#it is just tuple unpacking 
+X_train,X_test,y_train,y_test=train_test_split(X,y)# so train_test_split do is it take sthe X features and the y label and it makes the four component for you .#it is just tuple unpacking 
 
 
 #ALSO TO COMPARE THEM TO THE Y TEST LABELS
 
-#IN GENERAL FRAME WORK FOR ESSENTIALLY ANY SUPERVISED LEARNING ALGORITHM
 
-from sklearn .model_family(linear model,ensemble model,some model family  ) import ModelAlgo(linear regresion)
+#IN MACHINE LEARNING CONTEXT THESE ARE REFFERED TO AS THE HYPER PARAMETER
+from sklearn .model_family(linear model,ensemble model,some model family  ) import ModelAlgo(linear regresion)#whenever you do model performance first check its default parameter to check its baseline performance 
 #then create instance of that model
 mymodel=ModelAlgo(param1,param2)
 #now to train the model we pass inthe training set data
@@ -2475,5 +2475,47 @@ predictions=mymodel.predict(X_test)
 from sklearn.metrics import  error_metric
 performance=error_metric(y_test,predictions )
 
+for example 
+from sklearn.linear_model import LinearRegression
+help(LinearRegression)
+model=LinearRegression()
+model.fit(X_train,y_train)
+model.predict(X_test)
+
+#PERFORAMNCE EVALUATION FOR LINEAR REGRESSION 
+
+
+
+
+
+#LINEAR REGRESSION WITH THE SCIKIT LEARN DATA SETUP AND MODEL TRAINING 
+
+
+PREVIOUSLY WE HAVE JUST USED ONE X AND Y BUT NOW THAT WE UNDERSTAND THAT SCIKIT LEARN CAN USE GRADIENT DESCENT FOR US AND SOLVE A MULTIDIMENSIONAL FEATURE PROBLEM WE CAN EXPAND THIS PROBLEM OF WHAT IS THE RELATIONSHIP BETSEEN EACH ADVERTISING CHANNEL (TV ,RADIO,NEWSPAPER ) AND SALES ?
+IT HELP US TO SEE THAT ONE OF THE CHANNEL IS BETTER THAN THE OTHER
+
+
+fig,axes = plt.subplots(nrows=1,ncols=3,figsize=(16,6))
+
+axes[0].plot(df['TV'],df['sales'],'o')
+axes[0].set_ylabel("Sales")
+axes[0].set_title("TV Spend")
+
+axes[1].plot(df['radio'],df['sales'],'o')
+axes[1].set_title("Radio Spend")
+axes[1].set_ylabel("Sales")
+
+axes[2].plot(df['newspaper'],df['sales'],'o')
+axes[2].set_title("Newspaper Spend");
+axes[2].set_ylabel("Sales")
+plt.tight_layout();
+
+X=df.drop('sales',axis=1)#it is done to get the feature column
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)#33% of the data goes to the test #random state =42 to give in the random seed .
+
+#scikit learn is going to shuffle the array first it is cuz we donot ground the 70%first and 30%later are decreasing or incresing so what we do is to shuffle the array first the n we apply the train and test set in that way iit does not occur taht way tha tthe test set has early 30%and the train set has the lower 70% 
+#thsu there is a rnadom stste therethat is to first perform the shuffling and then divide the feature in to the traning and test set
 
 
