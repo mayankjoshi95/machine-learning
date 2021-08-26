@@ -2487,7 +2487,6 @@ model.predict(X_test)
 
 
 
-
 #LINEAR REGRESSION WITH THE SCIKIT LEARN DATA SETUP AND MODEL TRAINING 
 
 
@@ -2517,5 +2516,331 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 
 #scikit learn is going to shuffle the array first it is cuz we donot ground the 70%first and 30%later are decreasing or incresing so what we do is to shuffle the array first the n we apply the train and test set in that way iit does not occur taht way tha tthe test set has early 30%and the train set has the lower 70% 
 #thsu there is a rnadom stste therethat is to first perform the shuffling and then divide the feature in to the traning and test set
+
+
+#SOME OF THE MOST COMMON EVALUATION MATRIX FOR REGRESSION 
+
+MOST COMMMON EVALUATION MATRIX FOR REGRESSION
+
+1.MEAN ABSOLUTE ERROR :_HERE FOR EVERY VALUE IN THE ROW WE SUBTRACT TRUE VALUE TO THE PREDICTED VALUE AN TAKE THE ABSOLUTE VALUE .IT WON'T PUNISH LARGE EROR AND WE ARE NOT ACTUALLY GOING TO BE AWARE IF THERE WAS ANY ERROR .WE WANT OUR ERRO METRICS TO ACCOUNT FOR THESE 
+2.MEAN SQUARED ERROR :LARGE ERROS ARE PUNISHED USING MEAN SQUARE ERROR .THIS REPORT BACK UNITS DIFFERNST THAN THE Y I.E OF THE Y^2#it can be thought of as a variance of your prediction 
+3.ROOT MEAN SQUARE ERROR :SO TO GET BACK WE SIMPLY TAKKE THE SQUARE ROOT OF THE MEAN SQUARE ERROR#it can be thought of as a standard deviation of your predition.
+#THE METRIC IS APPLIED TO ANY REGRESSION TASK NOT JUST THE LINEAR REGRESSIION 
+
+test_predictions=model.predict(X_test)
+sns.histplot(data=df,x='sales')
+mean_absolute_error(y_test,test_predictions)#htis is the result for the data my model ahs never seen before
+1.5116692224549084
+mean_squared_error(y_test,test_predictions)
+3.79679723671522
+
+#mean squared errror is going to punish even the farthest error
+#this value canot be compared in terns of mean as this is not in unit of y ^2
+#thus we take square root of this to be compared to mean()
+#np.sqrt(mean_squared_error(y_test,test_predictions))#square root error
+#if the RMSE value is hgh then it tells that our model is good for most of the point but it is way of for some of the point 
+
+
+
+#EVALUATING RESIDUALS 
+
+
+OFTEN FOR LIEAR REGRESSION T IS A GOOD idea to seperately evaluate residuals (y-y(hat) )instead of jsut calculating performance metircs
+IN CASE OF LINEAR REGRESSION THE RESIDUAL ERROR SHOULD HAVE THE NORMAL DISTRIBUTION AND SHOULD BE RANDOMAND IF I HAD A PERFECT FIT AND I WILL BE HITTING EVERY SINGLE LINE THEN Y RESIDUAL HAS TO BE CLOSE TO ZERO THUS MEAN IS 0  IN REALITY WE GET OVERSHOOT OR UNDERSHOOT.
+#now the thing is how can we tell whether or not linear regression is valid if there are more than one feature as in single feature it is easy to tell .
+#BUT  WHAT WE CAN DO IS PLOTTING THE RESIDUAL ERROR AS COMPARED TO THE Y VALUE 
+
+#if more or les sfew points are above the line or few are below the line some are touching then there should be no clear line or curve #this lead to the conclusion that there is no dicrepencies for few of he dat apoint .
+#i should be able to plot this residual plot for any number of feATURES
+
+#FOR A NONVALID DATA SET
+
+
+#####RESIDUAL PLOT SHOWING A CLEAR PATTERN THAT FOR ANY FEATURES THAT THERE IS SOMETHING GOING ON WITH THE GIVEN DATA SET .
+###HERE IN THE EXAMPLE WE SHOULD CHOOSE A DIFFERENT MODEL OTHER THAN THE LINEAR REGRESSION 
+####THUS RESIDUAL PLOT TELL US THAT WHAT MODEL IS GOOD FOR THE GIVEN SET OF THE DATA
+
+
+test_residuals=y_test-test_predictions
+sns.scatterplot(x=y_test,y=test_residuals)
+plt.axhline(y=0,color='red',linestyle='--')
+
+
+#this plot the residual  thorugh the scatter plot and the horizontal line at the y=0 
+###sns.displot(test_residuals,bins=25,kde=True)
+
+
+##also using displot we can see through kde that we ovrshoot a little bit but we can manage
+
+
+######thus residual plot is necessary for telling taht the underlying residual plot is valid 
+
+
+
+##MODEL DEPLOYMENT AND COEFFICIENT IT IS FOR LOADING AND SAVING THE MODEL FOR FUTUTRE USE 
+
+
+##TILL NOW THE MACHINE LEARNING MODEL THAT WE USE HERE WE MAKE A TRAIN DATA SET THN MAKE A TRAIN MODEL THEN ADJUST THE MODEL AS NEEDED THEN EVALUATE THE PERFORMANCE USINT HE TEST MODEL THEN DEPLOY THE MODEL 
+
+
+
+##NOW WE SHOULD ADDRESS THE HYPER PARAMETER OF THE MODEL #LATER WE HAVE POLYNOMIAL REGRESSION  AND REGULARIZATION AS THE MODEL ADJUSTMENT .
+##FOR NOW WE FOCUS ON SIMPLE DEPLOYMENT OF OUR MODEL BY SAVING  ADN LOADING IT THEN APPLYING IT TO THE NEW DATA .
+final_model=LinearRegression()
+final_model.fit(X,y)
+final_model.coef_#it tell us the beta coefficient for the model we give for 3 features 
+array([ 0.04576465,  0.18853002, -0.00103749])(TV,radio,newspaper)#this indicate that model will cnacel out any value youspend n model advertising infact we have lower sale scuz of this#this is the same result in case of scatter plot #also radio spend has a greater effect #coefficient means taht increase in 1 unit leads to increase in say .045 of the TV sales given that radio and newspaper are fixed .
+
+
+     TV	radio	newspaper
+0	230.1	37.8	69.2
+1	44.5	39.3	45.1
+2	17.2	45.9	69.3
+3	151.5	41.3	58.5
+4	180.8	10.8	58.4
+
+
+
+#it is ay to difficult ot plot a graph as there are 3 values for newspaper   TV or radio
+
+
+
+y_hat=final_model.predict(X)
+fig,axes = plt.subplots(nrows=1,ncols=3,figsize=(16,6))
+
+axes[0].plot(df['TV'],df['sales'],'o')
+axes[0].plot(df['TV'],y_hat,'o',color='red')
+axes[0].set_ylabel("Sales")
+axes[0].set_title("TV Spend")
+
+axes[1].plot(df['radio'],df['sales'],'o')
+axes[1].plot(df['radio'],y_hat,'o',color='red')
+axes[1].set_title("Radio Spend")
+axes[1].set_ylabel("Sales")
+
+axes[2].plot(df['newspaper'],df['sales'],'o')
+axes[2].plot(df['newspaper'],y_hat,'o',color='red')
+axes[2].set_title("Newspaper Spend");
+axes[2].set_ylabel("Sales")
+plt.tight_layout();
+
+
+
+#it is impossible to draw the line here as we are dealing with more than one feature 
+#prediction point are i red and the default point are in the blue
+
+##in the real world it is very unlikely to have data of same unit thus we have to normalize the data first then we apply these methods
+
+
+#to deploy the model to the real world
+#THIS IS THE SUPERVISED MACHINE LEARNING PROCESS 
+##from joblib  import dump,load#these are two function that allow us to dump or save the model and then load it back up
+
+##from joblib  import dump,load
+dump(final_model,'final_sales_model.joblib')now we have dumped this model to the final_sales_model.joblib and send this or upload it to google drive .
+#then our coworker download this joblib file and then they load it up .using
+#loaded_model=load('final_sales_model.joblib')
+loaded_model.coef_
+array([ 0.04576465,  0.18853002, -0.00103749])
+#as can be seen it has the exact same coefficient .
+
+
+
+#149TV ,22 radio,12 newspaper
+#now this new campaign is about to run how many saleds you can get out of this ?
+campaign=[[149,22,12]]
+loaded_model.predict(campaign)
+array([13.893032])
+#thus here we can see this is the value of the sales we need to do 
+
+
+
+
+
+
+
+####POLYNOMIAL REGRESSSION
+Theory and Motivation
+
+
+two issues that polynomial regression will address for us 
+1.non linear feature realtionship to the label
+2.interaction term between the features 
+
+
+1.non linear feature realtionship to the label for ex:-sayy=log(x)
+##thus the motivation for going to the polynoial regression is to we are able to find those beta coefficient for those higher order if the realtionship between the first order term is linear .
+##however the above point is trying to say that for mainly it could be resonable to solve for a single linear beta coeff for polynomial of an origianl feature 
+
+
+2. INTERATION TERM:-there can be some feature that two feature are significant when they are in sync with each other ##ofr e:-if TV AND NEWSPAPER BOTH CONTRIBUTE IT LEAD TO MORE SALES 
+
+
+##SIMPLEST WAY TO MULTIPLY THE TWO FEATURE THAT  MULTIPLIES TWO EXISTING FEATURES TOGHTER TO CREATE AN INTERACTION TERM ,ALSO WE CAN KEEP THE ORIGIANL TERM .
+
+
+####FORTUNATELY Scikit-learn does this for us easily through pre processing  call.
+
+
+Scikit Preprocessing library contains many  useful tools  to apply to the original data  set before model training .
+
+
+######One tool is the PolynomialFeatures which automatically  creates both higher order feature polynomial and the interaction terms between all feature combinations
+
+
+PolynomialFeatures create 
+1.The bias default =1
+2.Values raised toa power for each degree(x,x^2,x^3)
+3.interaction term (x1*x2,x2*x3,x3*x1)
+
+
+
+
+#####for ex:- if we send two feature z A abB to this PolynomialFeatures then we get the term 1,A,B,A^2,B^2,AB.
+GENERALISED FEATURE LOOK AS X1,X2 
+THEN 1,X1,X2,X1X2,X1^2,X2^2
+
+##THUS WE ARE CREATING WAY MORE FEATURE THAN THE ORIGIANL DATA SET 
+####NOW WE CAN HAVE MORE BETA VALUES FROM ALL OF THESE HAVING BOTH INTERATION TER RELATIONSHIP OR HIGHER ORDER TERM RELATIONSHIP.
+#ALSO THERE IS NO GURANTEE THAT THERE WILL BE SIGNAL WITH HIGHER ORDER OR INTERACTIONTERM .
+
+##CREATING POLYNOMIAL FEATURES
+
+
+#STEPS 
+#First we are going to sepearate out feature from our label and then we are going to make new features from the 3 feautres 
+from sklearn.preprocessing import PolynomialFeatures
+polynomial_converter=PolynomialFeatures(degree=2,include_bias=False)#here it has feature of degree and include bias and also interaction_only .
+polynomial_converter.fit(X)##it is expecting to be fit onto a data set .##fitting here means it is going to grab and analyse the feature values it is not going to transform the whole thing .##here your X data you want to transform 
+
+polynomial_converter.fit(X)
+polynomial_converter.transform(X)
+array([[ 230.1 ,   37.8 ,   69.2 , ..., 1428.84, 2615.76, 4788.64],
+       [  44.5 ,   39.3 ,   45.1 , ..., 1544.49, 1772.43, 2034.01],
+       [  17.2 ,   45.9 ,   69.3 , ..., 2106.81, 3180.87, 4802.49],
+       ...,
+       [ 177.  ,    9.3 ,    6.4 , ...,   86.49,   59.52,   40.96],
+       [ 283.6 ,   42.  ,   66.2 , ..., 1764.  , 2780.4 , 4382.44],
+       [ 232.1 ,    8.6 ,    8.7 , ...,   73.96,   74.82,   75.69]])
+polynomial_converter.transform(X).shape
+(200, 9)
+X.shape
+(200, 3)
+
+poly_features=polynomial_converter.transform(X)
+poly_features.shape
+(200, 9)
+
+
+
+X.iloc[0]
+TV           230.1
+radio         37.8
+newspaper     69.2#it transform and fit both 
+Name: 0, dtype: float64
+
+poly_features[0]
+array([2.301000e+02, 3.780000e+01, 6.920000e+01, 5.294601e+04,
+       8.697780e+03, 1.592292e+04, 1.428840e+03, 2.615760e+03,
+       4.788640e+03])
+       
+##thus we do have all the interaction terms that we ahve taked about and finally we also have all the square term .
+###THUS WE HAVE ALL THE POSSIBLE 9 TERMS INCLUDING INTERACTION AND THE PRODUCT TERM.
+
+polynomial_converter.fit_transform(X)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(poly_features, y, test_size=0.3, random_state=101)
+from sklearn.linear_model import LinearRegression
+model=LinearRegression()
+model.fit(X_train,y_train)
+test_predictions=model.predict(X_test)
+from sklearn.metrics import mean_absolute_error ,mean_squared_error
+MAE=mean_absolute_error(y_test,test_predictions)
+MSE=mean_squared_error(y_test,test_predictions)
+RMSE=np.sqrt(MSE)
+MAE
+0.4896798044803811
+RMSE
+0.6646431757269268
+
+####In case of linear regression we get the MAE of 1.2 and RMSE :1.516
+
+###thsu clearley the Poly Regression is better than the linear regression.
+###IT IS IMPORTANT TO NOTE THAT TO COMPARE TWO MODEL WE DO THE EXACT TRAIN TEST SPLIT IN ONE MODEL AS WE DO IN THE OTHER 
+
+##THUS WE MUST BE CONSIDERING THE POLYNOMIAL FEATURES  
+model.coef_
+array([ 5.17095811e-02,  1.30848864e-02,  1.20000085e-02, -1.10892474e-04,
+        1.14212673e-03, -5.24100082e-05,  3.34919737e-05,  1.46380310e-04,
+       -3.04715806e-05])###here for our model many feature sare their but many are very small and comparing the above matrix to the below we find that many of the origianl 9 feature are not even considered significantly here .
+       
+###poly_features[0]
+array([2.301000e+02, 3.780000e+01, 6.920000e+01, 5.294601e+04,
+       8.697780e+03, 1.592292e+04, 1.428840e+03, 2.615760e+03,
+       4.788640e+03])
+###X.iloc[0]
+TV           230.1
+radio         37.8
+newspaper     69.2
+Name: 0, dtype: float64
+
+
+###Main thing to keep in mind that we are passsing in the polynomial features during training and testing instead of the original features .
+
+###How do we actually decide which degree is the best .
+
+##thus we have to see the overfitting and underfitting .
+
+
+
+
+
+##BIAS VARIANCE TRADE OFF
+
+
+##we have seen that a higher order polynomial model perform significantly better than a standard linear regression model .
+##BUT HOW CAN WE CHOOSE OPTIMAL DEGREE FOR THE POLYNOMIAL ?
+##WHAT TRADE OFF ARE WE TO CONSIDER AS WE INCREASE MODEL COMPLEXITY ?I.E AS WE INCREASE THE DEGREEE WHAT IS STOPPING US FROM GOING TO HIGHER DEGREE.
+
+
+
+######IN GENERAL INCREASING MODEL COMPLEXITY IN SEARCH FOR BETTER PERFORMANCE LEADS TO WHAT IS CALLED THE BISA VARIANCE TRADEOFF.
+
+###WE WANT TO HAVE A MODEL THAT  CAN GENRALIZE WELL TO NEW UNSEEN DATA ,BUT CAN ALSO ACCOUNT   FOR VARIANCE AND PATTERNS IN THE KNOWN DATA .
+
+
+##EXTREME BIAS OR EXTREME VARIANCE BOTH LEADS TO BAD MODELS .
+###WHAT WE CAN DO TO BETTER I=UNDERSTAND BIAS VS VARIANCE OR OVERFITTING VS UNDER FITTING IS TO VISUAIZE THE EFFECT BY CONSIDERING A MODEL THAT UNDERFITS(HIGH BIAS ) AND OVERFITS 
+(HIGH VARIANCE )
+
+
+
+####OVERFITING TO A DATA SET .
+
+###THE MODEL FITS TO MUCH TO THE NOISE FROM THE DATA THIS OFTEN RESULTS IN LOW ERROR ON TRAINING SETS BUT HIGH ERROR  ON THE TEST AND VALIDATION SET 
+###THUS THIS OFTEN RESULT IN FALSE BELIEF THAT OUR MODEL IS PERFORMING WELL TO THE TRAINING SET BUT IS NOT PERFORMING WELL TO THE UNSEEN DATA I.E OUR MODEL IS PERFECTLY FITTING TO THE TRINING DATA SET WITH THE ERROR OF ZERO BUT ON THE TEST DATA SET IT IS GOING TO HAVE A VERY LARGE ERRROR ON THE TEST DATA SET THUS IT IS VERY IMPORTANT TO PERFORM CROSS VALIDATION AND TRAIN TEST SPLIT AND ALSO CONSIDER TRAINING ERROR VS THE TESTING ERROR WHEN YOU ARE DECIDING THE MODEL COMPLEXITY  .
+
+
+
+
+###UNDERFITTING TO A DATA SET .
+
+HERE MODEL DOESNOT CAPTURE THE UNDERLYING TREND  OF THE DATA AND DOES NOT FIT THE TRAIN DATA WELL ENOUGH .
+##LOW VARIANCE BUT HIGH BIAS  .
+
+UNDERFITTING IS OFTEN A RESULT OF AN EXCESSIVE SIMPLE MODEL ..
+##SAY JUST A LINEAR FIT SO THE DATA IS NOT PERFORMING EITHER TO THE TRAIN SET OR TO THE TEST SET.
+
+
+###UNDERFITTING CAN LEAD TO POOR PERFORMANCE FOR BOTH THE TRAIN AND TEST SET .##THUS IT IS LITTLE EASIER TO CATCH UNDERFITTING RATHER THAN THE OVER FITTING .
+
+##OVERFITTING CAN BE HARDER TO DETECT SINCE GOOD PERFORMANCE ON THE TRAINING DATA COULD LEAD TO A MODEL THAT APPEARS TO BE PERFORMING WELL .
+
+##WHILE DEALING WITH THE MULTIDIMENSIONAL DATA SETS AT SOME POINT DUE TO TOO MANY FEATURES IT IS IMPOSSIBLE TO PLOT OUT THE MODEL ITSELF AGAINST THE TRAINING DATA AND TEST DATA SET .
+###WHEN THE ABOVE CASE ARISES I AM GOING TO PLOT OUT MY ERROR VS MODEL COMPLEXITY (IT IS A GENERAL TERM THAT IS GOING TO APPLY TO MORE THAN JUST POLYNOMIAL REGRESSION IN TE CASE OF THE POLYNOMIAL REGRESSION WHEN WE SAY THAT OUR MODEL IS COOMPLEX WE OFTEN MEANS A HIGHER ORDER POLYNOMIAL 
+
+
+
+
 
 
